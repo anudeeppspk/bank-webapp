@@ -9,6 +9,7 @@ import { FooterComponent } from './common/components/footer/footer.component';
 import { LoginComponent } from './bank-user/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './bank-user/profile/profile.component';
+import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProfileComponent } from './bank-user/profile/profile.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    TransferFundsComponent
   ],
   imports: [
     BrowserModule,
