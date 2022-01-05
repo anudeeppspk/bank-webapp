@@ -17,43 +17,43 @@
 
                     <div class="mx-4">
                         <form [formGroup]="profileDetailsForm">
-                            <div class="my-2">
+                            <div class="row my-2">
                                 <div>
                                     <label for="firstname" class="text-secondary label-name">Firstname</label>
                                 </div>
-                                <div class="">
-                                    <input id="firstname" pInputText formControlName="firstname"
+                                <div>
+                                    <input class="col-12" id="firstname" pInputText formControlName="firstname"
                                         tooltipPosition="bottom" tooltipEvent="focus" />
                                 </div>
                             </div>
 
-                            <div class="my-2">
+                            <div class="row my-2">
                                 <div>
                                     <label for="lastname" class="text-secondary label-name">Lastname</label>
                                 </div>
                                 <div>
-                                    <input id="lastname" pInputText formControlName="lastname" tooltipPosition="bottom"
-                                        tooltipEvent="focus" />
-                                </div>
-                            </div>
-
-                            <div class="my-2">
-                                <div>
-                                    <label for="mobile_number" class="text-secondary label-name">Mobile Number</label>
-                                </div>
-                                <div>
-                                    <input id="mobile_number" pInputText formControlName="mobile_number"
+                                    <input class="col-12" id="lastname" pInputText formControlName="lastname"
                                         tooltipPosition="bottom" tooltipEvent="focus" />
                                 </div>
                             </div>
 
-                            <div class="my-2">
+                            <div class="row my-2">
+                                <div>
+                                    <label for="mobile_number" class="text-secondary label-name">Mobile Number</label>
+                                </div>
+                                <div>
+                                    <input class="col-12" id="mobile_number" pInputText formControlName="mobile_number"
+                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                </div>
+                            </div>
+
+                            <div class="row my-2">
                                 <div>
                                     <label for="email_id" class="text-secondary label-name">Email ID</label>
                                 </div>
                                 <div>
-                                    <input id="email_id" pInputText formControlName="email_id" tooltipPosition="bottom"
-                                        tooltipEvent="focus" />
+                                    <input class="col-12" id="email_id" pInputText formControlName="email_id"
+                                        tooltipPosition="bottom" tooltipEvent="focus" />
                                 </div>
                             </div>
                         </form>
@@ -73,23 +73,24 @@
 
                     <div class="mx-4">
                         <form [formGroup]="updatePasswordForm">
-                            <div class="my-2">
+                            <div class="row my-2">
                                 <div>
                                     <label for="current_password" class="text-secondary label-name">Current
                                         Password</label>
                                 </div>
-                                <div class="">
-                                    <input id="current_password" pInputText formControlName="current_password"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                <div>
+                                    <input class="col-12" id="current_password" pInputText
+                                        formControlName="current_password" tooltipPosition="bottom"
+                                        tooltipEvent="focus" />
                                 </div>
                             </div>
 
-                            <div class="my-2">
+                            <div class="row my-2">
                                 <div>
                                     <label for="new_password" class="text-secondary label-name">New Password</label>
                                 </div>
                                 <div>
-                                    <input id="new_password" pInputText formControlName="new_password"
+                                    <input class="col-12" id="new_password" pInputText formControlName="new_password"
                                         tooltipPosition="bottom" tooltipEvent="focus" />
                                 </div>
                             </div>
@@ -97,7 +98,8 @@
                     </div>
 
                     <div class="text-center p-4">
-                        <button type="button" class="btn btn-primary" (click)="updatePassword()">Update Password</button>
+                        <button type="button" class="btn btn-primary" (click)="updatePassword()">Update
+                            Password</button>
                     </div>
 
                 </div>
