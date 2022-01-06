@@ -21,6 +21,12 @@ export class TransferFundsComponent implements OnInit {
 
   sendMoney() {
     console.log("Send money function called");
+    console.log("transferFundsForm: ", this.transferFundsForm.getRawValue());
+  }
+
+  searchAccount() {
+    console.log("Search account function called");
+    console.log("Account number: ", this.transferFundsForm.get('account_number')?.value);
   }
 
 }

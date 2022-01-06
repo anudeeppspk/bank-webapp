@@ -18,19 +18,19 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-4">
                         <div class="card shadow rounded d-flex">
-                            <div class="mx-4">
+                            <div class="mx-4 my-4">
                                 <form [formGroup]="transferFundsForm">
                                     <div class="row my-2">
                                         <div>
                                             <label for="account_number" class="text-secondary label-name">Account
                                                 Number</label>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 d-flex justify-content-between">
                                             <input class="col-10" id="account_number" pInputText
                                                 formControlName="account_number" tooltipPosition="bottom"
                                                 tooltipEvent="focus" />
-                                            <button class="col-1 mx-2 search-box"><img src="assets/search.svg"
-                                                    alt="search"></button>
+                                            <button (click)="searchAccount()" class="col-1 mx-2 search-box"><img
+                                                    src="assets/search.svg" alt="search"></button>
                                         </div>
                                     </div>
                                     <div class="row my-2">
@@ -38,7 +38,7 @@
                                             <label for="account_name" class="text-secondary label-name">Name</label>
                                         </div>
                                         <div>
-                                            <input class="col-12" id="account_name" pInputText
+                                            <input class="col-12 dark-box" id="account_name" pInputText
                                                 formControlName="account_name" tooltipPosition="bottom"
                                                 tooltipEvent="focus" readonly />
                                         </div>

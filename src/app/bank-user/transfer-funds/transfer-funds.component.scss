@@ -15,6 +15,14 @@
 }
 
 .search-box {
-    height: 30px;
+    height: 40px;
+    width: 40px;
+    background: #ffffff;
+    border: 1px solid #bbbfc7;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
+.dark-box {
+    mix-blend-mode: darken;
+}
