@@ -4,6 +4,7 @@ import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
 import { ProfileComponent } from './bank-user/profile/profile.component';
+import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 
 
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path:"home",
     component: DashboardComponent
+  },
+  {
+    path:"transactions",
+    component: TranscationsComponent
   }
   
 ];

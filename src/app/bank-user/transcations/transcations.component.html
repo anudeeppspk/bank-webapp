@@ -1,0 +1,34 @@
+<div>
+     <!-- Header -->
+     <app-header></app-header>
+
+     <!--Body-->
+     <div class="container">
+          
+        <h3 style="text-align: center;">Transactions</h3>
+        <br><br>
+        <div class="transaction-table">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th scope="col">Sno</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Type</th>
+                      </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr *ngFor = "let row of rows">                    
+                        <td>{{row.sno}}</td>
+                        <td>{{row.date}}</td>
+                        <td>{{row.time}}</td>
+                        <td>{{row.amount}}</td>
+                        <td>{{row.type}}</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+     </div>
+    
+</div>
