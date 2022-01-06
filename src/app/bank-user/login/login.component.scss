@@ -16,3 +16,14 @@ h3 {
 .card {
     box-shadow: 0 5px 5px lightgrey;
 }
+
+.animate {
+    cursor: pointer;
+    border: 2px dotted cyan;
+}
+
+.animate:hover {
+    transition: transform 1s ease;
+    transform: rotateY(360deg) scale(1.125);
+    background-color: lightcyan;
+}
