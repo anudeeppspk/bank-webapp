@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
 import { ProfileComponent } from './bank-user/profile/profile.component';
@@ -23,7 +24,12 @@ const routes: Routes = [
   {
     path: "transfer-funds",
     component: TransferFundsComponent
+  },
+  {
+    path:"home",
+    component: DashboardComponent
   }
+  
 ];
 
 @NgModule({

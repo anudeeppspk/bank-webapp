@@ -10,6 +10,7 @@ import { LoginComponent } from './bank-user/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './bank-user/profile/profile.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
+import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-fund
     FooterComponent,
     LoginComponent,
     ProfileComponent,
-    TransferFundsComponent
+    TransferFundsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
