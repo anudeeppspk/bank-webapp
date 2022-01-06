@@ -37,10 +37,12 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfileDetails() {
+    console.log("Save details function called");
     console.log(this.profileDetailsForm.getRawValue());
   }
 
   updatePassword() {
+    console.log("update password function called");
     console.log(this.updatePasswordForm.getRawValue());
   }
 
