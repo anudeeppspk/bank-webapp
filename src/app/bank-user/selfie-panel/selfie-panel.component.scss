@@ -1,0 +1,18 @@
+
+
+.click {
+    display: none;
+    position: absolute;
+    inset: 0;
+    height: 2.5rem;
+}
+
+.video-container {
+    position: relative;
+}
+
+.video-container:hover {
+    .click {
+        display: block;
+    }
+}

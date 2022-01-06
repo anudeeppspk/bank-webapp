@@ -12,6 +12,8 @@ import { ProfileComponent } from './bank-user/profile/profile.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 import { SignupComponent } from './bank-user/signup/signup.component';
 
+import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { SignupComponent } from './bank-user/signup/signup.component';
     LoginComponent,
     ProfileComponent,
     TransferFundsComponent,
-    SignupComponent
+    SignupComponent,
+    SelfiePanelComponent
   ],
   imports: [
     BrowserModule,
