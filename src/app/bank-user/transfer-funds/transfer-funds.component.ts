@@ -29,8 +29,7 @@ export class TransferFundsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  clearSearchData(event: any) {
-    console.log("onchange");
+  clearSearchData() {
     this.transferFundsForm.patchValue({
       account_name: "",
       account_ifsc: ""

@@ -26,7 +26,7 @@
                                                 Number</label>
                                         </div>
                                         <div class="col-12 d-flex justify-content-between">
-                                            <input type="text" (onChange)="clearSearchData($event)" class="col-10 p-2"
+                                            <input type="text" (keydown)="clearSearchData()" class="col-10 p-2"
                                                 id="account_number" formControlName="account_number" />
                                             <button (click)="searchAccount()" class="col-1 mx-2 search-box">
                                                 <div class="spinner">
