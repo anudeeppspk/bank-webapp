@@ -1,0 +1,28 @@
+.container {
+    height: 100vh;
+}
+
+.label-name {
+    font-size: 12px;
+}
+
+.card {
+    background-color: #fbfbfb;
+}
+
+.heading {
+    font-size: 30px;
+}
+
+.search-box {
+    height: 40px;
+    width: 40px;
+    background: #ffffff;
+    border: 1px solid #bbbfc7;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.dark-box {
+    mix-blend-mode: darken;
+}

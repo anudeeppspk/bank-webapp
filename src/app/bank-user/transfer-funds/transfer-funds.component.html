@@ -5,8 +5,64 @@
     <!-- Body -->
     <div class="container">
 
-        <div class="d-flex">
-            <span class="text-center">Transfer Funds</span>
+        <div class="row my-4 py-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <span class="heading">Transfer Funds</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4">
+                        <div class="card shadow rounded d-flex">
+                            <div class="mx-4 my-4">
+                                <form [formGroup]="transferFundsForm">
+                                    <div class="row my-2">
+                                        <div>
+                                            <label for="account_number" class="text-secondary label-name">Account
+                                                Number</label>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <input class="col-10" id="account_number" pInputText
+                                                formControlName="account_number" tooltipPosition="bottom"
+                                                tooltipEvent="focus" />
+                                            <button (click)="searchAccount()" class="col-1 mx-2 search-box"><img
+                                                    src="assets/search.svg" alt="search"></button>
+                                        </div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div>
+                                            <label for="account_name" class="text-secondary label-name">Name</label>
+                                        </div>
+                                        <div>
+                                            <input class="col-12 dark-box" id="account_name" pInputText
+                                                formControlName="account_name" tooltipPosition="bottom"
+                                                tooltipEvent="focus" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div>
+                                            <label for="amount" class="text-secondary label-name">Amount</label>
+                                        </div>
+                                        <div>
+                                            <input class="col-12" id="amount" pInputText formControlName="amount"
+                                                tooltipPosition="bottom" tooltipEvent="focus" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="text-center p-4">
+                                <button type="button" class="btn btn-primary" (click)="sendMoney()">Send</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

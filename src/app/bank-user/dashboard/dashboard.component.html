@@ -1,0 +1,46 @@
+<div>
+    <!--Header-->
+    <app-header></app-header>
+    
+    <!--Body-->
+    <div class="container">
+        
+        <div class="username-font">
+            <p>Hello,{{username}}</p>
+        </div>
+        
+        <!--Cards-->
+        <div class="row">
+            <div class="col-4">
+                <div class="card account"><br>
+                    <h3>&nbsp;&nbsp; Account Details</h3>
+                    <div class="account-details">
+                            <br>
+                            <p>&nbsp;&nbsp;Account Number: {{account_number}}</p>
+                            <p>&nbsp;&nbsp;Account IFSC: {{account_ifsc}}</p>
+                            <p>&nbsp;&nbsp;Account Branch: {{account_branch}}</p>
+                            <p>&nbsp;&nbsp;Balance: Rs. {{balance}} </p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card transcations ">
+                    <br><br>
+                    <a class="card-img" href="transactions">
+                      <img class="card-img" src="../../../assets/transaction.png" alt="Card image">
+                    </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card transfer">
+                    <br><br>
+                    <a class="card-img"  href="transfer-funds">
+                       <img  src="../../../assets/transfer.png" alt="Card image">
+                    </a>
+                </div>
+            </div>
+        </div>        
+    </div>       
+</div>
+

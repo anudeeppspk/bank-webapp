@@ -13,6 +13,8 @@ import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-fund
 import { SignupComponent } from './bank-user/signup/signup.component';
 
 import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.component';
+import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
+import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.comp
     ProfileComponent,
     TransferFundsComponent,
     SignupComponent,
-    SelfiePanelComponent
+    SelfiePanelComponent,
+    DashboardComponent,
+    TranscationsComponent
   ],
   imports: [
     BrowserModule,
