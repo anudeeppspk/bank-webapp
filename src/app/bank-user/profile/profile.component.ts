@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/error-dialog.component';
+import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
+
+import { ProfileDetails } from 'src/app/models/ProfileDetails';
+
+import { ProfileService } from 'src/app/services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,25 +15,29 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class ProfileComponent implements OnInit {
 
-  username: string = "Navaneeth Nivol";
+  full_name: string | null = null;
+  profileDetails: ProfileDetails | null = null;
 
-  profileDetailsForm = new FormGroup({
-    firstname: new FormControl('', [Validators.required]),
-    lastname: new FormControl('', [Validators.required]),
-    mobile_number: new FormControl('', [Validators.required]),
-    email_id: new FormControl('', [Validators.required])
-  });
-
-  updatePasswordForm = new FormGroup({
-    current_password: new FormControl('', [Validators.required]),
-    new_password: new FormControl('', [Validators.required])
-  });
-
-  constructor() { }
-
-  ngOnInit(): void {
+  updatePasswordLoadStates = {
+    isLoading: false,
   }
 
+  updatePasswordForm = new FormGroup({
+    current_password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    new_password: new FormControl('', [Validators.required, Validators.minLength(6)])
+  });
+
+  constructor(private profileService: ProfileService, public dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.profileService.getProfileDetails().subscribe((data) => {
+      console.log(data);
+      this.full_name = data.first_name + " " + data.last_name;
+      setTimeout(() => {
+        this.profileDetails = data;
+      }, 1500);
+    });
+  }
 
   getErrorValue(errors: any): any {
     if (errors) {
@@ -36,14 +47,29 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  saveProfileDetails() {
-    console.log("Save details function called");
-    console.log(this.profileDetailsForm.getRawValue());
-  }
-
   updatePassword() {
+
+    if (!this.updatePasswordForm.valid) {
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: 'Please fill in the details properly.' },
+        width: '30%',
+      });
+      return;
+    }
+
     console.log("update password function called");
     console.log(this.updatePasswordForm.getRawValue());
+    this.updatePasswordLoadStates.isLoading = true;
+    setTimeout(() => {
+      this.updatePasswordLoadStates.isLoading = false;
+      this.updatePasswordForm.reset();
+      this.dialog.open(SuccessDialogComponent, {
+        data: { successMessage: 'Password has been updated successfully.' },
+        width: '30%',
+      });
+    }, 1500);
+
+
   }
 
 }

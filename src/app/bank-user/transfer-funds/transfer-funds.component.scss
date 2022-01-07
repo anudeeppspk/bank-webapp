@@ -26,3 +26,18 @@
 .dark-box {
     mix-blend-mode: darken;
 }
+
+.spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #000000;
+}
+
+.transfer_spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: white;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+}

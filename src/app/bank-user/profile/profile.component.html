@@ -5,45 +5,51 @@
     <!-- Body -->
     <div class="container">
 
-        <div class="welcome-name my-5">
-            <p>Hello, {{username}}</p>
+        <div *ngIf="profileDetails == null"
+            class="d-flex flex-column justify-content-center align-items-center spinner">
+            <mat-spinner diameter=50></mat-spinner>
         </div>
 
-        <div class="row">
-            <div class="col-4">
-                <div class="card shadow rounded d-flex">
+        <div *ngIf="profileDetails != null">
 
-                    <p class="card-heading m-4">Profile Details</p>
+            <div class="welcome-name my-5">
+                <p>Hello, {{full_name}}</p>
+            </div>
 
-                    <div class="mx-4">
-                        <form [formGroup]="profileDetailsForm">
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="card shadow rounded d-flex">
+                        <div class="p-4">
+                            <p class="card-heading">Profile Details</p>
                             <div class="row my-2">
                                 <div>
-                                    <label for="firstname" class="text-secondary label-name">Firstname</label>
+                                    <label for="firstname" class="text-secondary label-name">First Name</label>
                                 </div>
                                 <div>
-                                    <input class="col-12" id="firstname" pInputText formControlName="firstname"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                    <input class="col-12 dark-box p-2" id="firstname" tooltipPosition="bottom"
+                                        tooltipEvent="focus" [ngModel]="profileDetails.first_name" readonly />
                                 </div>
                             </div>
 
                             <div class="row my-2">
                                 <div>
-                                    <label for="lastname" class="text-secondary label-name">Lastname</label>
+                                    <label for="lastname" class="text-secondary label-name">Last Name</label>
                                 </div>
                                 <div>
-                                    <input class="col-12" id="lastname" pInputText formControlName="lastname"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                    <input class="col-12 dark-box p-2" id="lastname" tooltipPosition="bottom"
+                                        tooltipEvent="focus" [ngModel]="profileDetails.last_name" readonly />
                                 </div>
                             </div>
 
                             <div class="row my-2">
                                 <div>
-                                    <label for="mobile_number" class="text-secondary label-name">Mobile Number</label>
+                                    <label for="mobile_number" class="text-secondary label-name">Mobile
+                                        Number</label>
                                 </div>
                                 <div>
-                                    <input class="col-12" id="mobile_number" pInputText formControlName="mobile_number"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                    <input class="col-12 dark-box p-2" id="mobile_number" tooltipPosition="bottom"
+                                        tooltipEvent="focus" [ngModel]="profileDetails.mobile_number" readonly />
                                 </div>
                             </div>
 
@@ -52,59 +58,83 @@
                                     <label for="email_id" class="text-secondary label-name">Email ID</label>
                                 </div>
                                 <div>
-                                    <input class="col-12" id="email_id" pInputText formControlName="email_id"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+                                    <input class="col-12 dark-box p-2" id="email_id" tooltipPosition="bottom"
+                                        tooltipEvent="focus" [ngModel]="profileDetails.email_id" readonly />
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div class="text-center p-4">
-                        <button type="button" class="btn btn-primary" (click)="saveProfileDetails()">Save
-                            Details</button>
                     </div>
-
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="card shadow rounded d-flex">
 
-                    <p class="card-heading m-4">Update Password</p>
+                <div class="col-4">
+                    <div class="card shadow rounded d-flex">
 
-                    <div class="mx-4">
-                        <form [formGroup]="updatePasswordForm">
-                            <div class="row my-2">
-                                <div>
-                                    <label for="current_password" class="text-secondary label-name">Current
-                                        Password</label>
-                                </div>
-                                <div>
-                                    <input class="col-12" id="current_password" pInputText
-                                        formControlName="current_password" tooltipPosition="bottom"
-                                        tooltipEvent="focus" />
-                                </div>
-                            </div>
+                        <p class="card-heading m-4">Update Password</p>
 
-                            <div class="row my-2">
-                                <div>
-                                    <label for="new_password" class="text-secondary label-name">New Password</label>
+                        <div class="mx-4">
+                            <form [formGroup]="updatePasswordForm">
+                                <div class="row my-2">
+                                    <div>
+                                        <label for="current_password" class="text-secondary label-name">Current
+                                            Password</label>
+                                    </div>
+                                    <div>
+                                        <input class="col-12 p-2" id="current_password" type="password"
+                                            formControlName="current_password" tooltipPosition="bottom"
+                                            tooltipEvent="focus" />
+                                        <div
+                                            *ngIf="updatePasswordForm.get('current_password')?.invalid && (updatePasswordForm.get('current_password')?.dirty || updatePasswordForm.get('current_password')?.touched)">
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updatePasswordForm.get('current_password')?.errors?.['required']">
+                                                Current Password is required.
+                                            </span>
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updatePasswordForm.get('current_password')?.errors?.['minlength']">
+                                                Current Password must be at least 4 characters long.
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input class="col-12" id="new_password" pInputText formControlName="new_password"
-                                        tooltipPosition="bottom" tooltipEvent="focus" />
+
+                                <div class="row my-2">
+                                    <div>
+                                        <label for="new_password" class="text-secondary label-name">New Password</label>
+                                    </div>
+                                    <div>
+                                        <input class="col-12 p-2" id="new_password" type="password"
+                                            formControlName="new_password" tooltipPosition="bottom"
+                                            tooltipEvent="focus" />
+                                        <div
+                                            *ngIf="updatePasswordForm.get('new_password')?.invalid && (updatePasswordForm.get('new_password')?.dirty || updatePasswordForm.get('new_password')?.touched)">
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updatePasswordForm.get('new_password')?.errors?.['required']">
+                                                Password is required.
+                                            </span>
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updatePasswordForm.get('new_password')?.errors?.['minlength']">
+                                                Password must be at least 4 characters long.
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <button type="button" class="btn btn-primary" (click)="updatePassword()">
+                                <div class="password_spinner mx-5">
+                                    <mat-spinner *ngIf="updatePasswordLoadStates.isLoading" diameter=20></mat-spinner>
+                                </div>
+                                <span *ngIf="!updatePasswordLoadStates.isLoading">Update Password</span>
+                            </button>
+                        </div>
+
                     </div>
-
-                    <div class="text-center p-4">
-                        <button type="button" class="btn btn-primary" (click)="updatePassword()">Update
-                            Password</button>
-                    </div>
-
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Footer -->

@@ -26,11 +26,37 @@
                                                 Number</label>
                                         </div>
                                         <div class="col-12 d-flex justify-content-between">
-                                            <input class="col-10" id="account_number" pInputText
-                                                formControlName="account_number" tooltipPosition="bottom"
-                                                tooltipEvent="focus" />
-                                            <button (click)="searchAccount()" class="col-1 mx-2 search-box"><img
-                                                    src="assets/search.svg" alt="search"></button>
+                                            <input type="text" (onChange)="clearSearchData($event)" class="col-10 p-2"
+                                                id="account_number" formControlName="account_number" />
+                                            <button (click)="searchAccount()" class="col-1 mx-2 search-box">
+                                                <div class="spinner">
+                                                    <mat-spinner *ngIf="transferAmountLoadStates.isSearchLoading"
+                                                        diameter=20></mat-spinner>
+                                                </div>
+                                                <img *ngIf="!transferAmountLoadStates.isSearchLoading"
+                                                    src="assets/search.svg" alt="search">
+                                            </button>
+                                        </div>
+                                        <div
+                                            *ngIf="transferFundsForm.get('account_number')?.invalid && (transferFundsForm.get('account_number')?.dirty || transferFundsForm.get('account_number')?.touched)">
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="transferFundsForm.get('account_number')?.errors?.['required']">
+                                                Account Number is required.
+                                            </span>
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="transferFundsForm.get('account_number')?.errors?.['minlength']">
+                                                Account Number must be at least 6 characters long.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div>
+                                            <label for="account_ifsc" class="text-secondary label-name">IFSC
+                                                Code</label>
+                                        </div>
+                                        <div>
+                                            <input class="col-12 p-2 dark-box" id="account_ifsc"
+                                                formControlName="account_ifsc" readonly />
                                         </div>
                                     </div>
                                     <div class="row my-2">
@@ -38,9 +64,8 @@
                                             <label for="account_name" class="text-secondary label-name">Name</label>
                                         </div>
                                         <div>
-                                            <input class="col-12 dark-box" id="account_name" pInputText
-                                                formControlName="account_name" tooltipPosition="bottom"
-                                                tooltipEvent="focus" readonly />
+                                            <input class="col-12 p-2 dark-box" id="account_name"
+                                                formControlName="account_name" readonly />
                                         </div>
                                     </div>
                                     <div class="row my-2">
@@ -48,15 +73,35 @@
                                             <label for="amount" class="text-secondary label-name">Amount</label>
                                         </div>
                                         <div>
-                                            <input class="col-12" id="amount" pInputText formControlName="amount"
-                                                tooltipPosition="bottom" tooltipEvent="focus" />
+                                            <input class="col-12 p-2" id="amount" formControlName="amount" />
+                                            <div
+                                                *ngIf="transferFundsForm.get('amount')?.invalid && (transferFundsForm.get('amount')?.dirty || transferFundsForm.get('amount')?.touched)">
+                                                <span class="error-text m-0 p-0"
+                                                    *ngIf="transferFundsForm.get('amount')?.errors?.['required']">
+                                                    Amount is required.
+                                                </span>
+                                                <span class="error-text m-0 p-0"
+                                                    *ngIf="transferFundsForm.get('amount')?.errors?.['minlength']">
+                                                    Amount must be at least 6 characters long.
+                                                </span>
+                                                <span class="error-text m-0 p-0"
+                                                    *ngIf="transferFundsForm.get('amount')?.errors?.['pattern']">
+                                                    Invalid Amount
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
 
                             <div class="text-center p-4">
-                                <button type="button" class="btn btn-primary" (click)="sendMoney()">Send</button>
+                                <button type="button" class="btn btn-primary" (click)="sendMoney()">
+                                    <div class="transfer_spinner mx-2">
+                                        <mat-spinner *ngIf="transferAmountLoadStates.isTransferLoading" diameter=20>
+                                        </mat-spinner>
+                                    </div>
+                                    <span *ngIf="!transferAmountLoadStates.isTransferLoading">Send</span>
+                                </button>
                             </div>
 
                         </div>
