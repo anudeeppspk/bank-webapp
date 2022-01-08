@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +18,8 @@ import { SignupComponent } from './bank-user/signup/signup.component';
 import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.component';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
+import { ErrorDialogComponent } from './common/components/error-dialog/error-dialog.component';
+import { SuccessDialogComponent } from './common/components/success-dialog/success-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +32,19 @@ import { TranscationsComponent } from './bank-user/transcations/transcations.com
     SignupComponent,
     SelfiePanelComponent,
     DashboardComponent,
-    TranscationsComponent
+    TranscationsComponent,
+    ErrorDialogComponent,
+    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,3 +17,26 @@
 .container {
     height: 100vh;
 }
+
+.dark-box {
+    mix-blend-mode: darken;
+}
+
+.spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #000000;
+}
+
+.spinner {
+    height: 90%;
+}
+
+.password_spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: white;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+}
