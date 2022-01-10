@@ -1,29 +1,33 @@
-
-
-img {
-    height: 3rem;
-    width: 3rem;
+body {
+    background-color: lightgoldenrodyellow;
 }
 
-h3 {
-    margin: 0;
-}
-
-.gray-bg {
-    background: #F0F0F0;
-}
-
-.card {
-    box-shadow: 0 5px 5px lightgrey;
-}
-
-.animate {
-    cursor: pointer;
-    border: 2px dotted cyan;
-}
-
-.animate:hover {
-    transition: transform 1s ease;
-    transform: rotateY(360deg) scale(1.125);
-    background-color: lightcyan;
+.login-container {    
+    img {
+        height: 3rem;
+        width: 3rem;
+    }
+    
+    h3 {
+        margin: 0;
+    }
+    
+    .gray-bg {
+        background: #F0F0F0;
+    }
+    
+    .card {
+        box-shadow: 0 5px 5px lightgrey;
+    }
+    
+    .animate {
+        cursor: pointer;
+        border: 2px dotted cyan;
+    }
+    
+    .animate:hover {
+        transition: transform 1s ease;
+        transform: rotateY(360deg) scale(1.125);
+        background-color: lightcyan;
+    }
 }
