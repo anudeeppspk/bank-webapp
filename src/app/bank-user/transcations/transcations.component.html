@@ -3,45 +3,18 @@
      <app-header></app-header>
 
      <!--Body-->
-     <div id="myGrid" class="ag-theme-balham container">
-        <h3 style="text-align: center;">Transactions</h3>   
+     <div  class="container ag-theme-balham">
+        <h3 style="text-align: center;">Transactions</h3>  
+        <br> 
         <ag-grid-angular 
-            style="width: 1000px; height:400px;"     
-            class="ag-row-hover ag-column-hover"
+            style="width: 1000px; height:400px;" 
             [rowData]="rowData" 
             [columnDefs]="columnDefs"
             [defaultColDef]="defaultColDef"
-            [pagination]="true">
+            [pagination]="true"
+            [animateRows]="true">
         </ag-grid-angular>
      </div>
-     <!--
-     <div class="container">
-          
-        <h3 style="text-align: center;">Transactions</h3>
-        <br><br>
-        <div class="transaction-table">
-            <table class="table table-hover">
-                <thead class="table-head border-light">
-                    <tr>
-                        <th scope="col">Sno</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Type</th>
-                      </tr>
-                </thead>
-                <tbody class="table-body">
-                    <tr >                   
-                        <td>{{sno}}</td>
-                        <td>{{date}}</td>
-                        <td>{{time}}</td>
-                        <td>{{amount}}</td>
-                        <td>{{type}}</td>
-                    </tr>
-                </tbody>
-              </table>
-        </div>
-     </div>-->
 
      
  

@@ -17,10 +17,10 @@ export class DashboardService {
     let user_data: AccountDetails = {
       account_number: 1234567899,
       account_ifsc:"SBI45678911",
-      account_branch: "vizag",
+      account_branch: "Visakhapatnam",
       account_balance: 87654,
-      first_name: "Xyz",
-      last_name: "Abc"
+      first_name: "Niharika",
+      last_name: "U"
     };
     return of(user_data);
   }

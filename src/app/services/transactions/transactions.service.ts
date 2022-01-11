@@ -12,7 +12,7 @@ export class TransactionsService {
   private url: string ="http://localhost:3000/api";
 
   constructor(private httpClient: HttpClient) { }
-
+/*
   getTransactionDetails(): Observable<TransctionDetails>{
     let transcation_data: TransctionDetails = 
       {
@@ -24,5 +24,5 @@ export class TransactionsService {
     };
     
   return of(transcation_data);
-  }
+  }*/
 }
