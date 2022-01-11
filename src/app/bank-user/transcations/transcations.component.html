@@ -3,6 +3,18 @@
      <app-header></app-header>
 
      <!--Body-->
+     <div id="myGrid" class="ag-theme-balham container">
+        <h3 style="text-align: center;">Transactions</h3>   
+        <ag-grid-angular 
+            style="width: 1000px; height:400px;"     
+            class="ag-row-hover ag-column-hover"
+            [rowData]="rowData" 
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [pagination]="true">
+        </ag-grid-angular>
+     </div>
+     <!--
      <div class="container">
           
         <h3 style="text-align: center;">Transactions</h3>
@@ -29,7 +41,9 @@
                 </tbody>
               </table>
         </div>
-     </div>
+     </div>-->
+
+     
  
      <!-- Footer -->
     <app-footer></app-footer>

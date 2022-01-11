@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@ag-grid-community/all-modules": "^26.2.1",
     "@angular/animations": "~13.0.0",
     "@angular/cdk": "^13.1.1",
     "@angular/common": "~13.0.0",
@@ -20,6 +21,8 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "ag-grid-angular": "^26.2.0",
+    "ag-grid-community": "^26.2.1",
     "bootstrap": "^5.1.3",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",

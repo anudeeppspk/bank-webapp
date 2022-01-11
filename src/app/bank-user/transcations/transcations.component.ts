@@ -9,7 +9,7 @@ import { TransactionsService } from '../../services/transactions/transactions.se
   styleUrls: ['./transcations.component.scss']
 })
 export class TranscationsComponent implements OnInit {
-    sno: any;
+   /* sno: any;
     date: any;
     time: any;
     amount:any;
@@ -25,7 +25,30 @@ export class TranscationsComponent implements OnInit {
       this.time=transcation_data.transcation_time;
       this.amount=transcation_data.transcation_amount;
       this.type=transcation_data.transcation_type;        
-    });
+    });*/
+    columnDefs = [
+      {headerName: 'Sno', field: 'sno',},
+      {headerName: 'Date', field: 'Date'},
+      {headerName: 'Time', field: 'Time'},
+      {headerName: 'Amount', field: 'Amount'},
+      {headerName: 'Type', field: 'Type'}
+  ];
+
+  rowData = [
+      {sno: 1, Date: '12-12-2020', Time: "21:00", Amount:34999, Type:"debit"},
+      {sno: 2, Date: '3-1-2022', Time: "21:00",Amount:4999, Type:"credit"},
+      {sno: 3, Date: '9-1-2022', Time: "21:00",Amount:786875, Type:"debit"}
+  ];
+
+  defaultColDef = {
+    sortable: true,
+    filter: true
+  };
+
+constructor() { }
+
+ngOnInit(): void {
+}
   }
 
-}
+

@@ -21,6 +21,8 @@ import { TranscationsComponent } from './bank-user/transcations/transcations.com
 import { ErrorDialogComponent } from './common/components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './common/components/success-dialog/success-dialog.component';
 
+import { AgGridModule } from 'ag-grid-angular'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { SuccessDialogComponent } from './common/components/success-dialog/succe
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule, 
+    AgGridModule.withComponents([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
