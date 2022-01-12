@@ -3,11 +3,13 @@
      <app-header></app-header>
 
      <!--Body-->
+     <h3 style="text-align: center;"class="heading">Transaction Details</h3> 
      <div  class="container ag-theme-balham">
-        <h3 style="text-align: center;">Transactions</h3>  
+         
         <br> 
         <ag-grid-angular 
             style="width: 1000px; height:400px;" 
+            class="ag-grid"
             [rowData]="rowData" 
             [columnDefs]="columnDefs"
             [defaultColDef]="defaultColDef"

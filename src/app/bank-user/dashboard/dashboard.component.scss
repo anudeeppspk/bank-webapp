@@ -1,9 +1,9 @@
 .username-font{
-position: absolute;
+position: relative;
 width: 246px;
 height: 45px;
 left: 52px;
-top: 180px;
+top: 60px;
 
 font-family: Poppins;
 font-style: normal;
@@ -14,10 +14,10 @@ line-height: 45px;
 }
 
 .card{
-    position: absolute;
+    position: relative;
     width: 300px;
     height: 300px;
-    top: 286px;
+    top: 86px;
     display: flex;
     
     background: #FBF4F4;
@@ -35,7 +35,6 @@ line-height: 45px;
 }
 
 .account{
-    left: 49px;
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
@@ -50,9 +49,6 @@ line-height: 45px;
     align-self: center;
     vertical-align: middle;
 }
-
-
-
 .container {
     height: 100vh;
 }
