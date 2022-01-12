@@ -1,49 +1,76 @@
 <div>
     <!--Header-->
     <app-header></app-header>
-    
+
     <!--Body-->
     <div class="container">
-        
-        <div class="username-font">
-            <p>Hello,{{full_name}}</p>
+
+        <div class="username-font my-5">
+            <p>Hello, {{full_name}}</p>
         </div>
-        
+
         <!--Cards-->
         <div class="row">
+
             <div class="col-6 col-md-4">
-                <div class="card account"><br>
-                    <h3>&nbsp;&nbsp; Account Details</h3>
+                <div class="card p-4 account">
+                    <h3 class="mb-4" style="font-size: 21px;">Account Details</h3>
                     <div class="account-details">
-                            <br>
-                            <p>&nbsp;&nbsp;Account Number: {{acc_number}}</p>
-                            <p>&nbsp;&nbsp;Account IFSC: {{acc_ifsc}}</p>
-                            <p>&nbsp;&nbsp;Account Branch: {{acc_branch}}</p>
-                            <p>&nbsp;&nbsp;Balance: Rs. {{balance}} </p>
-                        
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Account Number:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{acc_number}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Account IFSC:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{acc_ifsc}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Account Branch:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{acc_branch}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Balance: Rs.</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{balance}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-6 col-md-4">
-                <div class="card transcations ">
-                    <br><br>
-                    <a class="card-img" href="transactions">
-                      <img class="card-img" src="../../../assets/transaction.png" alt="Card image">
-                    </a>
-                </div>
+                <a href="transactions">
+                    <div class="card p-4 d-flex justify-content-center align-items-center">
+                        <img class="card-img" src="../../../assets/transaction.png" alt="Card image">
+                    </div>
+                </a>
             </div>
+
             <div class="col-6 col-md-4">
-                <div class="card transfer">
-                    <br><br>
-                    <a class="card-img"  href="transfer-funds">
-                       <img  src="../../../assets/transfer.png" alt="Card image">
-                    </a>
-                </div>
+                <a href="transfer-funds">
+                    <div class="card p-4 d-flex justify-content-center align-items-center">
+                        <img class="card-img" src="../../../assets/transfer.png" alt="Card image">
+                    </div>
+                </a>
             </div>
-        </div>        
-    </div>    
-     
+
+        </div>
+    </div>
+
     <!-- Footer -->
     <app-footer></app-footer>
 </div>
-

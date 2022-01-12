@@ -1,26 +1,28 @@
 <div>
-     <!-- Header -->
-     <app-header></app-header>
+    <!-- Header -->
+    <app-header></app-header>
 
-     <!--Body-->
-     <h3 style="text-align: center;"class="heading">Transaction Details</h3> 
-     <div  class="container ag-theme-balham">
-         
-        <br> 
-        <ag-grid-angular 
-            style="width: 1000px; height:400px;" 
-            class="ag-grid"
-            [rowData]="rowData" 
-            [columnDefs]="columnDefs"
-            [defaultColDef]="defaultColDef"
-            [pagination]="true"
-            [animateRows]="true">
-        </ag-grid-angular>
-     </div>
+    <!--Body-->
+    <div class="container">
 
-     
- 
-     <!-- Footer -->
+        <div class="row my-4 py-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <span class="heading">Transaction Details</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="ag-theme-balham">
+                <ag-grid-angular style="width: 1000px; height:400px;" class="ag-grid" [rowData]="rowData"
+                    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true">
+                </ag-grid-angular>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
     <app-footer></app-footer>
 </div>
-

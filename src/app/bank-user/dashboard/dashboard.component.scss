@@ -1,54 +1,28 @@
-.username-font{
-position: relative;
-width: 246px;
-height: 45px;
-left: 52px;
-top: 60px;
-
-font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 30px;
-line-height: 45px;
-
+.container {
+    height: 100vh;
 }
 
-.card{
-    position: relative;
+.username-font {
+    font-size: 25px;
+    line-height: 45px;
+}
+
+.card {
     width: 300px;
     height: 300px;
-    top: 86px;
-    display: flex;
-    
-    background: #FBF4F4;
+    background: #fbf4f4;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 }
 
-.account-details{
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
+.account-details {
     font-size: 15px;
-    vertical-align: middle;
-    text-align:justify;
 }
 
-.account{
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
+.account {
     font-size: 21px;
-    vertical-align: middle;
 }
 
-
-.card-img{
-    width: 169px;
-    height: 174px;
-    align-self: center;
-    vertical-align: middle;
-}
-.container {
-    height: 100vh;
+.card-img {
+    width: 200px;
 }
