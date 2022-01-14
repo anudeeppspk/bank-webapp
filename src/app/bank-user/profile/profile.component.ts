@@ -56,13 +56,25 @@ export class ProfileComponent implements OnInit {
     }
 
     console.log("update password function called");
-    console.log(this.updatePasswordForm.getRawValue());
-    this.updatePasswordLoadStates.isLoading = false;
-    this.updatePasswordForm.reset();
-    this.dialog.open(SuccessDialogComponent, {
-      data: { successMessage: 'Password has been updated successfully.' },
-      width: '30%',
+    let password_data = this.updatePasswordForm.getRawValue();
+    this.updatePasswordLoadStates.isLoading = true;
+    this.profileService.updatePassword(password_data.current_password, password_data.new_password).subscribe((data) => {
+      console.log(data);
+      this.updatePasswordForm.reset();
+      this.dialog.open(SuccessDialogComponent, {
+        data: { successMessage: 'Password has been updated successfully.' },
+        width: '30%',
+      });
+      this.updatePasswordLoadStates.isLoading = false;
+    }, (error) => {
+      console.log(error);
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: 'Error occured, please try again later.' },
+        width: '30%',
+      });
+      return;
     });
+
   }
 
 }

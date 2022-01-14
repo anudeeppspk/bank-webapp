@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { ProfileDetails } from 'src/app/models/ProfileDetails';
 import { environment } from 'src/environments/environment';
@@ -13,21 +13,15 @@ export class ProfileService {
   constructor(private httpClient: HttpClient) { }
 
   getProfileDetails(): Observable<ProfileDetails> {
-
-    // let data: ProfileDetails = {
-    //   first_name: "Navaneeth",
-    //   last_name: "Nivol",
-    //   mobile_number: 1234567890,
-    //   email_id: "nivol@gmail.com"
-    // };
-
-    // return of(data);
-
     return this.httpClient.get<ProfileDetails>(environment.baseURL + "/getUser");
   }
 
-  updatePassword(oldPassword: string, newPassword: string) {
-
+  updatePassword(oldPassword: string, newPassword: string): Observable<HttpResponse<string>> {
+    let body = {
+      currentPassword: oldPassword,
+      newPassword: newPassword
+    }
+    return this.httpClient.post<any>(environment.baseURL + "/updatePassword", JSON.parse(JSON.stringify(body)), { observe: 'response' });
   }
 
 
