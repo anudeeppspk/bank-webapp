@@ -52,9 +52,7 @@
                             Sign in
                         </button>
                     </div>
-                    <div *ngIf="invalidCredentials" class="form-group text-center">
-                        <div [style.display]="invalidCredentials ? 'block' : 'none'" class="invalid-feedback">Invalid credentials</div>
-                    </div>
+                    
                     <div class="form-group text-center mt-5">
                         <small id="passwordHelpBlock" class="form-text text-muted">
                             Dont have an account. <a class="primary" routerLink="/signup">Sign up</a>
