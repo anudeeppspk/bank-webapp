@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  invalidCredentials: boolean = false;
-
   isLoggingIn: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, 
@@ -27,10 +25,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
-
-    this.loginForm.valueChanges.subscribe(() => {
-      this.invalidCredentials = false;
-    })
+   
 
   }
 
@@ -40,29 +35,37 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    this.invalidCredentials = false;
     this.loginForm.markAllAsTouched()
+
     if (this.loginForm.invalid) {
       return;
     }
+
     this.isLoggingIn = true;
+
      const payload = {
       userName: this.loginForm.value.email,
       password: this.loginForm.value.password
      }
-    this.loginService.login(payload).subscribe(res => {
-      this.isLoggingIn = false;
-      this._snackBar.open('Login Successfully', 'OK', {
-        horizontalPosition: 'end',
-        verticalPosition: 'top'
-      });
-      if (!res) {
-        this.invalidCredentials = true;
-        return;
+
+    this.loginService.login(payload).subscribe(({
+      next: (response) => {
+        this.isLoggingIn = false;
+        this._snackBar.open('Login Successfully', 'OK', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        
+        localStorage.setItem('user', JSON.stringify(response));
+        this.router.navigate(['home']);
+      }, error: (e) => {
+        this._snackBar.open('Username does not exists', 'OK', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        this.isLoggingIn = false;
       }
-      localStorage.setItem('user', JSON.stringify(res));
-      this.router.navigate(['home']);
-    })
+    }))
   }
 
 }
