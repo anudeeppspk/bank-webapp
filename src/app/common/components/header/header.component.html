@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="p-3">
-            <a href="home"><img class="logo" src="assets/logo-white.svg" alt="" width="65px" height="65px"></a>
+            <a routerLink="home"><img class="logo" src="assets/logo-white.svg" alt="" width="65px" height="65px"></a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,21 +10,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mx-4">
-                    <a href="home"><span>Home</span></a>
+                <li class="nav-item  mx-4">
+                    <a routerLink="/home" ><span>Home</span></a>
+                </li>
+                <li class="nav-item  mx-4">
+                    <a routerLink="/profile" ><span>Profile</span></a>
                 </li>
                 <li class="nav-item mx-4">
-                    <a href="profile"><span>Profile</span></a>
+                    <a routerLink="/transactions"><span>Transactions</span></a>
                 </li>
-                <li class="nav-item mx-4">
-                    <a href="transactions"><span>Transactions</span></a>
-                </li>
-                <li class="nav-item mx-4">
-                    <a href="transfer-funds"><span>Transfer Funds</span></a>
+                <li class="nav-item  mx-4">
+                    <a routerLink="/transfer-funds"><span>Transfer Funds</span></a>
                 </li>
             </ul>
             <span class="ms-auto nav-item mx-5">
-                <a href="login">Logout</a>
+                <a href="" (click)="logout()">Logout</a>
             </span>
         </div>
     </nav>
