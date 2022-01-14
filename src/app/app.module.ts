@@ -15,13 +15,18 @@ import { ProfileComponent } from './bank-user/profile/profile.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 import { SignupComponent } from './bank-user/signup/signup.component';
 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.component';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { ErrorDialogComponent } from './common/components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './common/components/success-dialog/success-dialog.component';
 
-import { AgGridModule } from 'ag-grid-angular'; 
+import { LoginService } from './services/login/login.service';
+import { SignupService } from './services/signup/signup.service'
+import { AuthGuard } from './auth.guard';
+import { EasyLoginGuard } from './easy-login.guard';
 
 @NgModule({
   declarations: [
@@ -46,10 +51,10 @@ import { AgGridModule } from 'ag-grid-angular';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDialogModule, 
-    AgGridModule.withComponents([]),
+    MatDialogModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [ LoginService, SignupService, AuthGuard, EasyLoginGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

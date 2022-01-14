@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation ,} from '@angular/core';
-import{Router} from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,33 +14,55 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
+  invalidCredentials: boolean = false;
 
-  constructor( private formBuilder: FormBuilder,private router: Router ) { }
+  isLoggingIn: boolean = false;
+
+  constructor(private formBuilder: FormBuilder, private router: Router, 
+    private loginService: LoginService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
+
+    this.loginForm.valueChanges.subscribe(() => {
+      this.invalidCredentials = false;
+    })
+
   }
 
-   // convenience getter for easy access to form fields
-   get formControls(): { [key: string]: AbstractControl } {
+  get formControls(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
   }
-   onSubmit() {
 
+  onSubmit() {
 
+    this.invalidCredentials = false;
     this.loginForm.markAllAsTouched()
-
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
-        return;
+      return;
     }
-
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.loginForm.value, null, 4));
-    this.router.navigate(['home'])
+    this.isLoggingIn = true;
+     const payload = {
+      userName: this.loginForm.value.email,
+      password: 'qwert'
+     }
+    this.loginService.login(payload).subscribe(res => {
+      this.isLoggingIn = false;
+      this._snackBar.open('Login Successfully', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top'
+      });
+      if (!res) {
+        this.invalidCredentials = true;
+        return;
+      }
+      localStorage.setItem('user', JSON.stringify(res));
+      this.router.navigate(['home']);
+    })
   }
+
 }

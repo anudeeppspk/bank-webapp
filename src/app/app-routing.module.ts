@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
@@ -7,6 +8,7 @@ import { ProfileComponent } from './bank-user/profile/profile.component';
 import { SignupComponent } from './bank-user/signup/signup.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
+import { EasyLoginGuard } from './easy-login.guard';
 
 
 const routes: Routes = [
@@ -17,27 +19,37 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [EasyLoginGuard]
   },
   {
     path: "signup",
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [EasyLoginGuard]
   },
   {
     path: "profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "transfer-funds",
-    component: TransferFundsComponent
+    component: TransferFundsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"home",
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"transactions",
-    component: TranscationsComponent
+    component: TranscationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:"**",
+    redirectTo: 'login'
   }
   
 ];

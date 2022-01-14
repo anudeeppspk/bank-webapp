@@ -16,4 +16,12 @@ body {
         background: #F0F0F0;
         box-shadow: 0 5px 5px lightgrey;
     }
+
+    .invalid-feedback div {
+        display: none;
+    }
+
+    .invalid-feedback div:first-child {
+        display: block;
+    }
 }
