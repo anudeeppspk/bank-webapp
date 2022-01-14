@@ -21,7 +21,7 @@ export class TransferFundsService {
   }
 
   transferAmount(funds: any): Observable<Object> {
-    return this.httpClient.post<any>(environment.baseURL + `/accountBalance?toAccountNumber=${funds.account_number}&amount=${funds.amount}`, {}, { observe: 'response' });
+    return this.httpClient.post<any>(environment.baseURL + `/accountBalance?toAccountNumber=${funds.account_number}&amount=${funds.amount}`, {}, { responseType: 'text' as 'json' });
   }
 
 }

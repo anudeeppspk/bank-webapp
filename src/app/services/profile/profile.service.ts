@@ -21,7 +21,7 @@ export class ProfileService {
       currentPassword: oldPassword,
       newPassword: newPassword
     }
-    return this.httpClient.post<any>(environment.baseURL + "/updatePassword", JSON.parse(JSON.stringify(body)), { observe: 'response' });
+    return this.httpClient.post<any>(environment.baseURL + "/updatePassword", JSON.parse(JSON.stringify(body)), { responseType: 'text' as 'json' });
   }
 
 

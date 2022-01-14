@@ -66,10 +66,10 @@ export class ProfileComponent implements OnInit {
         width: '30%',
       });
       this.updatePasswordLoadStates.isLoading = false;
-    }, (error) => {
-      console.log(error);
+    }, (err) => {
+      console.log(err);
       this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: 'Error occured, please try again later.' },
+        data: { errorMessage: err.error },
         width: '30%',
       });
       return;
