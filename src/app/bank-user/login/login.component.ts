@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn = true;
      const payload = {
       userName: this.loginForm.value.email,
-      password: 'qwert'
+      password: this.loginForm.value.password
      }
     this.loginService.login(payload).subscribe(res => {
       this.isLoggingIn = false;
