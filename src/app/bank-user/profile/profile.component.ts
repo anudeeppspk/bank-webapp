@@ -32,10 +32,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getProfileDetails().subscribe((data) => {
       console.log(data);
-      this.full_name = data.first_name + " " + data.last_name;
-      setTimeout(() => {
-        this.profileDetails = data;
-      }, 1500);
+      this.full_name = data.firstname + " " + data.lastname;
+      this.profileDetails = data;
     });
   }
 
@@ -59,17 +57,12 @@ export class ProfileComponent implements OnInit {
 
     console.log("update password function called");
     console.log(this.updatePasswordForm.getRawValue());
-    this.updatePasswordLoadStates.isLoading = true;
-    setTimeout(() => {
-      this.updatePasswordLoadStates.isLoading = false;
-      this.updatePasswordForm.reset();
-      this.dialog.open(SuccessDialogComponent, {
-        data: { successMessage: 'Password has been updated successfully.' },
-        width: '30%',
-      });
-    }, 1500);
-
-
+    this.updatePasswordLoadStates.isLoading = false;
+    this.updatePasswordForm.reset();
+    this.dialog.open(SuccessDialogComponent, {
+      data: { successMessage: 'Password has been updated successfully.' },
+      width: '30%',
+    });
   }
 
 }

@@ -1,6 +1,7 @@
 export interface ProfileDetails {
-    first_name: String,
-    last_name: String,
-    mobile_number: Number | null,
-    email_id: String
+    accountnumber: String,
+    username: String,
+    firstname: number,
+    lastname: String,
+    phonenumber: String
 }
