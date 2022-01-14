@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AgGridModule } from 'ag-grid-angular'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,8 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './bank-user/profile/profile.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 import { SignupComponent } from './bank-user/signup/signup.component';
-
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { SelfiePanelComponent } from './bank-user/selfie-panel/selfie-panel.component';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
@@ -52,9 +52,10 @@ import { EasyLoginGuard } from './easy-login.guard';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AgGridModule.withComponents([]),
   ],
-  providers: [ LoginService, SignupService, AuthGuard, EasyLoginGuard ],
+  providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

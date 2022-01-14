@@ -23,20 +23,33 @@ export class TranscationsComponent implements OnInit {
   };
 
   //temp col data
-  rowData = [
-    { sno: 1, Date: '12-12-2020', Time: "21:00", Amount: 34999, Type: "Debit" },
-    { sno: 2, Date: '3-1-2022', Time: "08:00", Amount: 4999, Type: "Credit" },
-    { sno: 3, Date: '9-1-2022', Time: "13:00", Amount: 786875, Type: "Debit" }
-  ];
+  rowData: any = [];
 
-  constructor() { }
+  constructor(private transactionService: TransactionsService) { }
 
   ngOnInit(): void {
-    /* dynamic data
-    fetch('https://www.ag-grid.com/example-assets/row-data.json')
-        .then(result => result.json())
-        .then(rowData => this.rowData = rowData);
-  */
+
+    this.transactionService.getTransactionDetails().subscribe(data => {
+
+      let sno = 1;
+
+      for (let item of data) {
+        let transaction = {
+          sno: sno,
+          Date: item.date,
+          Time: item.time,
+          Amount: item.amount,
+          Type: item.type
+        };
+
+        sno++;
+        this.rowData.push(transaction);
+      }
+
+      console.log(this.rowData);
+
+    })
+
   }
 }
 
