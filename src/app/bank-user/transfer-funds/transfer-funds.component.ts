@@ -12,9 +12,11 @@ import { TransferFundsService } from 'src/app/services/transfer-funds/transfer-f
 })
 export class TransferFundsComponent implements OnInit {
 
+  // Validators.minLength(11), Validators.maxLength(11)
+
   transferFundsForm = new FormGroup({
     account_number: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    account_ifsc: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+    account_ifsc: new FormControl('', [Validators.required]),
     account_name: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
   });
@@ -38,6 +40,8 @@ export class TransferFundsComponent implements OnInit {
 
   sendMoney() {
 
+    console.log(this.transferFundsForm.getRawValue());
+
     if (!this.transferFundsForm.valid) {
 
       let error_message = 'Please fill in the details properly.';
@@ -58,20 +62,22 @@ export class TransferFundsComponent implements OnInit {
 
     this.transferFundService.transferAmount(this.transferFundsForm.getRawValue()).subscribe((data) => {
 
-      setTimeout(() => {
-        this.transferFundsForm.reset();
-        this.dialog.open(SuccessDialogComponent, {
-          data: { successMessage: "Amount transferred successfully." },
-          width: '30%',
-        });
-        this.transferAmountLoadStates.isTransferLoading = false;
-      }, 1000);
+      console.log(data);
+
+      this.transferFundsForm.reset();
+      this.dialog.open(SuccessDialogComponent, {
+        data: { successMessage: "Amount transferred successfully." },
+        width: '30%',
+      });
+      this.transferAmountLoadStates.isTransferLoading = false;
+
 
     }, (err) => {
       this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: err.message },
+        data: { errorMessage: "Error occured, please try again later" },
         width: '30%',
       });
+      this.transferAmountLoadStates.isTransferLoading = false;
     });
   }
 
@@ -90,19 +96,21 @@ export class TransferFundsComponent implements OnInit {
 
     this.transferFundService.searchAccountNumber(this.transferFundsForm.get('account_number')?.value).subscribe((data: any) => {
 
-      setTimeout(() => {
-        this.transferFundsForm.patchValue({
-          account_name: data.account_name,
-          account_ifsc: data.account_ifsc
-        });
-        this.transferAmountLoadStates.isSearchLoading = false;
-      }, 1000);
+      console.log(data);
+
+      this.transferFundsForm.patchValue({
+        account_name: data.name,
+        account_ifsc: data.ifsccode
+      });
+      this.transferAmountLoadStates.isSearchLoading = false;
 
     }, (err) => {
+      console.log(err);
       this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: err.message },
+        data: { errorMessage: "Account not found" },
         width: '30%',
       });
+      this.transferAmountLoadStates.isSearchLoading = false;
     });
   }
 

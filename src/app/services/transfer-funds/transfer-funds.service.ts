@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -16,19 +17,11 @@ export class TransferFundsService {
 
     console.log("Account Number: ", account_number);
 
-    let data = {
-      account_name: "Navaneeth",
-      account_ifsc: "ABCIN000001"
-    }
-
-    return of(data);
-
-    // return this.httpClient.get<ProfileDetails>(this.url);
+    return this.httpClient.get<Object>(environment.baseURL + `/accountDetails?accountNumber=${account_number}`);
   }
 
-  transferAmount(funds: object): Observable<Boolean> {
-    console.log("Funds: ", funds);
-    return of(true);
+  transferAmount(funds: any): Observable<Object> {
+    return this.httpClient.post<any>(environment.baseURL + `/accountBalance?toAccountNumber=${funds.account_number}&amount=${funds.amount}`, {}, { observe: 'response' });
   }
 
 }
