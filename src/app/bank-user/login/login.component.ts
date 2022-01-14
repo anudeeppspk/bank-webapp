@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
+import { AuthStorageService } from 'src/app/services/auth-storage/auth-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   isLoggingIn: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, 
-    private loginService: LoginService, private _snackBar: MatSnackBar) { }
+    private loginService: LoginService, private snackbarSerivice: SnackbarService, private authStorageService: AuthStorageService) { }
 
   ngOnInit(): void {
 
@@ -51,18 +52,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(payload).subscribe(({
       next: (response) => {
         this.isLoggingIn = false;
-        this._snackBar.open('Login Successfully', 'OK', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-        
-        localStorage.setItem('user', JSON.stringify(response));
+        this.snackbarSerivice.open('success', 'Logged in Successfully');
+        this.authStorageService.setAuthIdentity(JSON.stringify(response));
         this.router.navigate(['home']);
       }, error: (e) => {
-        this._snackBar.open('Username does not exists', 'OK', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.snackbarSerivice.open('error', 'Credentials do not match.');
         this.isLoggingIn = false;
       }
     }))

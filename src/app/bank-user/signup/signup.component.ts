@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignupService } from 'src/app/services/signup/signup.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   isSignIn: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private signupService: SignupService, private _snackBar: MatSnackBar) { }
+    private signupService: SignupService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -49,24 +49,18 @@ export class SignupComponent implements OnInit {
       phonenumber: this.signupForm.value.mobile
     }
     
-    this.signupService.signup(payload).subscribe(({
+    this.signupService.signup(payload).subscribe({
       next: (response) => {
         this.isSignIn = false;
-        this._snackBar.open('Account Registered Successfully', 'OK', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.snackbarService.open('success', 'Account Registered Successfully');
         if (response) {
           this.router.navigate(["login"])
           return;
         }
       }, error: (e) => {
-        this._snackBar.open('Account already registered', 'OK', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.snackbarService.open('error', 'Something went wrong. Try again.');
         this.isSignIn = false;
       }
-    }))
+    })
   }
 }

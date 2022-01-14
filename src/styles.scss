@@ -23,3 +23,16 @@ label {
     display: block;
     margin-bottom: 0.5rem;
 }
+
+
+.mat-snack-bar-container.error {
+    background-color: #ea4949;
+}
+
+.mat-snack-bar-container.success {
+    background-color: #33c733;
+}
+
+.mat-snack-bar-container.info {
+    background-color: #897fbd;
+}
