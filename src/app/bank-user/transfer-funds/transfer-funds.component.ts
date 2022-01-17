@@ -12,11 +12,9 @@ import { TransferFundsService } from 'src/app/services/transfer-funds/transfer-f
 })
 export class TransferFundsComponent implements OnInit {
 
-  // Validators.minLength(11), Validators.maxLength(11)
-
   transferFundsForm = new FormGroup({
     account_number: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    account_ifsc: new FormControl('', [Validators.required]),
+    account_ifsc: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
     account_name: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
   });
