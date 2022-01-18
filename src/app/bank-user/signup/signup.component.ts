@@ -54,7 +54,8 @@ export class SignupComponent implements OnInit {
         this.isSignIn = false;
         this._snackBar.open('Account Registered Successfully', 'OK', {
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
+          duration: 5000
         });
         if (response) {
           this.router.navigate(["login"])
@@ -63,7 +64,8 @@ export class SignupComponent implements OnInit {
       }, error: (e) => {
         this._snackBar.open('Account already registered', 'OK', {
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
+          duration: 5000
         });
         this.isSignIn = false;
       }

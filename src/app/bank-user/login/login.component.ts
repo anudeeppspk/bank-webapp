@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
         this.isLoggingIn = false;
         this._snackBar.open('Login Successfully', 'OK', {
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
+          duration: 5000
         });
         
         localStorage.setItem('user', JSON.stringify(response));
@@ -61,7 +62,8 @@ export class LoginComponent implements OnInit {
       }, error: (e) => {
         this._snackBar.open('Username does not exists', 'OK', {
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
+          duration: 5000
         });
         this.isLoggingIn = false;
       }
