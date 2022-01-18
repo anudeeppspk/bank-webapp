@@ -1,1 +1,1 @@
-export const getAPIBaseUrl = () => localStorage.getItem('url') || 'http://13.234.200.225:8080/';
+export const getAPIBaseUrl = () => localStorage.getItem('url') || 'https://bankapi.ddns.net';
