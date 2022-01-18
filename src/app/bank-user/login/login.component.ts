@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
         this.authStorageService.setAuthIdentity(JSON.stringify(response));
         this.router.navigate(['home']);
       }, error: (e) => {
-        this.snackbarSerivice.open('error', 'Credentials do not match.');
+        console.log(e);
+        this.snackbarSerivice.open('error', e.error.statusMessage);
         this.isLoggingIn = false;
       }
     }))
