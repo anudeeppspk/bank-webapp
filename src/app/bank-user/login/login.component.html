@@ -42,7 +42,10 @@
                             [ngClass]="{ 'is-invalid': (formControls['password'].touched || formControls['password'].dirty) && formControls['password'].errors }">
                         <div *ngIf="formControls['password'].errors" class="invalid-feedback">
                             <div *ngIf="formControls['password'].errors['required']">Password is required</div>
+                            <div *ngIf="formControls['password'].errors['pattern']">Password must have atleast one
+                                uppercase, one lower case letter, one number and one special character</div>
                             <div *ngIf="formControls['password'].errors['minlength']">Password must be at least 8 characters</div>
+                            <div *ngIf="formControls['password'].errors['maxlength']">password should be maximum of 15 characters</div>
                         </div>
                     </div>
                     <br>
