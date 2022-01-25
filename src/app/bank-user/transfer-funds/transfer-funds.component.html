@@ -6,16 +6,16 @@
     <div class="container">
 
         <div class="row my-4 py-4">
-            <div class="col-12">
+            <div class="col-4">
                 <div class="d-flex justify-content-center">
                     <span class="heading">Transfer Funds</span>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="row d-flex justify-content-center">
+        <div class="row" >
+            <div class="col-12 " >
+                <div class="row  "  >
                     <div class="col-4">
                         <div class="card shadow rounded d-flex">
                             <div class="mx-4 my-4">
@@ -102,15 +102,20 @@
                                     </div>
                                     <span *ngIf="!transferAmountLoadStates.isTransferLoading">Send</span>
                                 </button>
+                                <a routerLink="/benificiary">ADD BENIFICIARY</a>
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>    
         </div>
 
     </div>
+
+
+   
+    
 
     <!-- Footer -->
     <app-footer></app-footer>

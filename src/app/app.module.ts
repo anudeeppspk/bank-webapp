@@ -22,11 +22,15 @@ import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { ErrorDialogComponent } from './common/components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './common/components/success-dialog/success-dialog.component';
-
+import { BenificiaryComponent } from '../app/bank-user/benificiary/benificiary.component';
 import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service'
 import { AuthGuard } from './auth.guard';
 import { EasyLoginGuard } from './easy-login.guard';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { EasyLoginGuard } from './easy-login.guard';
     DashboardComponent,
     TranscationsComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    BenificiaryComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -54,6 +60,9 @@ import { EasyLoginGuard } from './easy-login.guard';
     MatDialogModule,
     MatSnackBarModule,
     AgGridModule.withComponents([]),
+    MatTableModule,
+    MatPaginatorModule
+
   ],
   providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard],
   bootstrap: [AppComponent]

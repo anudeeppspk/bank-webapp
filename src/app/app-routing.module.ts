@@ -9,6 +9,7 @@ import { SignupComponent } from './bank-user/signup/signup.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 import { EasyLoginGuard } from './easy-login.guard';
+import { BenificiaryComponent } from "./bank-user/benificiary/benificiary.component"
 
 
 const routes: Routes = [
@@ -38,20 +39,24 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"home",
+    path: "home",
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:"transactions",
+    path: "transactions",
     component: TranscationsComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:"**",
+    path: "benificiary",
+    component:BenificiaryComponent,
+  },
+  {
+    path: "**",
     redirectTo: 'login'
   }
-  
+
 ];
 
 @NgModule({
