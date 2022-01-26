@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
 
-  private url: string = "http://localhost:3000/api";
-
   constructor(private httpClient: HttpClient) { }
 
   getAcountDetails(): Observable<any> {

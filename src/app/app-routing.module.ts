@@ -49,10 +49,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "benificiary",
-    component:BenificiaryComponent,
-  },
-  {
     path: "**",
     redirectTo: 'login'
   }

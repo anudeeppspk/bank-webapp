@@ -21,18 +21,39 @@ export class BenificiaryComponent implements OnInit {
     {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
     {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
     {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
+    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
+    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
+    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
+    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
+    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
+    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
+    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
+    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
+    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
+    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
+    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
+    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
+    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
+    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
+    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
+    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
+    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
+    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
   ]
   constructor( private formbuilder:FormBuilder) { }
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
       benAccNum : [''],
-      nickname  : [''] 
+      nickname  : [''] ,
+      name :[''],
+      myaccnum :['']
 
     })
   }
 
-  displayedColumns = ['position','benAccNum', 'name', 'nickname', 'userAccNum'];
+
+  displayedColumns = ['position', 'nickname'];
 
   dataSource = new MatTableDataSource<benificiary>(this.ELEMENT_DATA);
 
@@ -40,6 +61,11 @@ export class BenificiaryComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  add() {
+    console.log(this.formValue.value)
+    this.formValue.reset();
   }
 
 }

@@ -35,7 +35,6 @@
                             <div *ngIf="formControls['email'].errors['email']">Email must be a valid email address</div>
                         </div>
                     </div>
-                    <br>
                     <div class="form-group">
                         <label for="inputPassword4">Password</label>
                         <input [readonly]="isLoggingIn" type="password" placeholder="Enter password" class="form-control" id="inputPassword4" formControlName="password"
@@ -45,7 +44,6 @@
                             <div *ngIf="formControls['password'].errors['minlength']">Password must be at least 8 characters</div>
                         </div>
                     </div>
-                    <br>
                     <div class="form-group text-center">
                         <button [disabled]="isLoggingIn" type="submit" class="btn btn-primary">
                             <span *ngIf="isLoggingIn" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
