@@ -29,11 +29,13 @@ export class TranscationsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.transactionService.getTransactionDetails().subscribe(data => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+
+    this.transactionService.getTransactionDetails(user.accountnumber).subscribe(data => {
 
       let sno = 1;
 
-      for (let item of data) {
+      for (let item of data.transactions) {
         let transaction = {
           sno: sno,
           Date: item.date,
@@ -46,9 +48,7 @@ export class TranscationsComponent implements OnInit {
         this.rowData.push(transaction);
       }
 
-      console.log(this.rowData);
-
-    })
+    });
 
   }
 }

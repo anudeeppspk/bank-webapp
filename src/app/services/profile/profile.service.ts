@@ -12,16 +12,20 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProfileDetails(): Observable<ProfileDetails> {
-    return this.httpClient.get<ProfileDetails>(environment.baseURL + "/getUser");
+  getProfileDetails(accountNumber: string): Observable<ProfileDetails> {
+    let body = {
+      accountNumber: accountNumber
+    }
+    return this.httpClient.post<any>(environment.baseURL + "/getUser", body);
   }
 
-  updatePassword(oldPassword: string, newPassword: string): Observable<HttpResponse<string>> {
+  updatePassword(accountNumber: string, oldPassword: string, newPassword: string): Observable<HttpResponse<string>> {
     let body = {
+      accountNumber: accountNumber,
       currentPassword: oldPassword,
       newPassword: newPassword
     }
-    return this.httpClient.post<any>(environment.baseURL + "/updatePassword", JSON.parse(JSON.stringify(body)), { responseType: 'text' as 'json' });
+    return this.httpClient.post<any>(environment.baseURL + "/updatePassword", body);
   }
 
 

@@ -30,10 +30,11 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.profileService.getProfileDetails().subscribe((data) => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.getProfileDetails(user.accountnumber).subscribe((data: any) => {
       console.log(data);
-      this.full_name = data.firstname + " " + data.lastname;
-      this.profileDetails = data;
+      this.full_name = data.user.firstname + " " + data.user.lastname;
+      this.profileDetails = data.user;
     });
   }
 
@@ -58,7 +59,8 @@ export class ProfileComponent implements OnInit {
     console.log("update password function called");
     let password_data = this.updatePasswordForm.getRawValue();
     this.updatePasswordLoadStates.isLoading = true;
-    this.profileService.updatePassword(password_data.current_password, password_data.new_password).subscribe((data) => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.updatePassword(user.accountnumber, password_data.current_password, password_data.new_password).subscribe((data) => {
       console.log(data);
       this.updatePasswordForm.reset();
       this.dialog.open(SuccessDialogComponent, {

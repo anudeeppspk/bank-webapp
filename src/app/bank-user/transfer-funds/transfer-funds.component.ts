@@ -58,7 +58,9 @@ export class TransferFundsComponent implements OnInit {
     console.log("Send money function called");
     this.transferAmountLoadStates.isTransferLoading = true;
 
-    this.transferFundService.transferAmount(this.transferFundsForm.getRawValue()).subscribe((data) => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+
+    this.transferFundService.transferAmount(user.accountnumber, this.transferFundsForm.getRawValue()).subscribe((data) => {
 
       console.log(data);
 
@@ -73,7 +75,7 @@ export class TransferFundsComponent implements OnInit {
     }, (err) => {
       console.log(err);
       this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: err.error },
+        data: { errorMessage: err.error.message },
         width: '30%',
       });
       this.transferAmountLoadStates.isTransferLoading = false;
@@ -98,8 +100,8 @@ export class TransferFundsComponent implements OnInit {
       console.log(data);
 
       this.transferFundsForm.patchValue({
-        account_name: data.name,
-        account_ifsc: data.ifsccode
+        account_name: data.account.name,
+        account_ifsc: data.account.ifsccode
       });
       this.transferAmountLoadStates.isSearchLoading = false;
 
