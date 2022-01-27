@@ -47,7 +47,6 @@ export class BenificiaryComponent implements OnInit {
       benAccNum : [''],
       nickname  : [''] ,
       name :[''],
-      myaccnum :['']
 
     })
   }
