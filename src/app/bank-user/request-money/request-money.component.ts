@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/error-dialog.component';
-import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
+//import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
 import { TransferFundsService } from 'src/app/services/transfer-funds/transfer-funds.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-transfer-funds',
-  templateUrl: './transfer-funds.component.html',
-  styleUrls: ['./transfer-funds.component.scss']
+  selector: 'app-request-money',
+  templateUrl: './request-money.component.html',
+  styleUrls: ['./request-money.component.scss']
 })
-export class TransferFundsComponent implements OnInit {
+export class RequestMoneyComponent implements OnInit {
 
   transferFundsForm = new FormGroup({
     account_number: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -19,36 +20,14 @@ export class TransferFundsComponent implements OnInit {
     amount: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
   });
 
-
-
-  columnDefs = [
-    { headerName: 'Sno', field: 'sno',width:50 },
-    { headerName: 'Name', field: 'Name',width:150, headerTooltip: "Name of the requester" },
-    { headerName: 'Amount', field: 'Amount',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Approve', field: 'Approve',width:150, headerTooltip: "Amount transferes/received" }
-  ];
-  defaultColDef = {
-    sortable: true,
-    filter: true
-  };
-  rowData: any = [];
-  
-
-
   transferAmountLoadStates = {
     isSearchLoading: false,
     isTransferLoading: false,
   }
 
-  constructor(public transferFundService: TransferFundsService, public dialog: MatDialog) { }
+  constructor(public transferFundService: TransferFundsService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    let transaction = {
-      sno: 1,
-      Name:'Praveen',
-      Amount: 1000
-    };
-    this.rowData.push(transaction);
   }
 
   clearSearchData() {
@@ -58,7 +37,7 @@ export class TransferFundsComponent implements OnInit {
     });
   }
 
-  sendMoney() {
+  requestMoney() {
 
     console.log(this.transferFundsForm.getRawValue());
 
@@ -76,7 +55,7 @@ export class TransferFundsComponent implements OnInit {
       });
       return;
     }
-
+    
     console.log("Send money function called");
     this.transferAmountLoadStates.isTransferLoading = true;
 
@@ -85,10 +64,16 @@ export class TransferFundsComponent implements OnInit {
       console.log(data);
 
       this.transferFundsForm.reset();
-      this.dialog.open(SuccessDialogComponent, {
-        data: { successMessage: "Amount transferred successfully." },
-        width: '30%',
-      });
+      this._snackBar.open('Money Requested', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 500000000000
+      }
+     // this.dialog.open(RequestDialogComponent, {
+        //data: { successMessage: "Amount transferred successfully." },
+        //width: '30%',
+      //}
+      );
       this.transferAmountLoadStates.isTransferLoading = false;
 
 
@@ -134,5 +119,4 @@ export class TransferFundsComponent implements OnInit {
       this.transferAmountLoadStates.isSearchLoading = false;
     });
   }
-
 }

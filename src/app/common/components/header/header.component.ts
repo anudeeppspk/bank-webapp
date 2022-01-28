@@ -17,5 +17,6 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('user');
     this.router.navigate(['login'])
   }
+  onNavigate(location: any){ this.router.navigate(location); }
 
 }

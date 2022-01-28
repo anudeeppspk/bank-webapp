@@ -20,8 +20,54 @@
                     <a routerLink="/transactions"><span>Transactions</span></a>
                 </li>
                 <li class="nav-item  mx-4">
-                    <a routerLink="/transfer-funds"><span>Transfer Funds</span></a>
+                    <a routerLink="/transfer-funds"><span>Send Money</span></a>
                 </li>
+                <li class="nav-item  mx-4">
+                    <a routerLink="/request-money"><span>Request Money</span></a>
+                </li>
+
+                    <!--
+                   <div class="navbar">
+                        
+                        <div class="dropdown">
+                          <button class="dropbtn">Dropdown 
+                            <i class="fa fa-caret-down"></i>
+                          </button>
+                          <div class="dropdown-content">
+                            <a href="/transfer-funds">Transer Funds</a>
+                            
+                          </div>
+                        </div> 
+                      </div>   
+                    <div class="navbar">
+                        <div class="dropdown">
+                            <button class="dropbtn">Transfer
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a routerLink="/transfer-funds"><span>Transfer Funds</span></a>
+                                <a routerLink="/transfer-funds"><span>Transfer Funds</span></a>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                    
+                    <select (change)="onNavigate($event.target.value)"> 
+                    <option>--Select Option--</option> <option value="transfer-funds">Location</option> 
+                </select>
+                </div><li class="nav-item  mx-4">
+                <div class="btn-group" dropdown>
+                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                      Transfer Funds <span class="caret"></span>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                      <li ><a class="dropdown-item" routerLink="/transfer-funds">Login</a></li>
+                      <li role="menuitem"><a class="dropdown-item" routerLink="/home">Home</a></li>
+                      <li role="menuitem"><a class="dropdown-item" routerLink="/catalog">Catalog</a></li>
+                    </ul>
+                  
+                </li>-->
             </ul>
             <span class="ms-auto nav-item mx-5">
                 <a href="" (click)="logout()">Logout</a>
