@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { benificiary } from "../../models/benificiary-details";
+import { benificiary, BenificiaryPayload } from "../../models/benificiary-details";
 import{FormBuilder,FormGroup} from '@angular/forms';
+import { BenificiaryService } from 'src/app/services/benificiary/benificiary.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import SelectBeneficiary from 'src/app/triggers/selectBeneficiary';
 
 
 @Component({
@@ -14,57 +16,71 @@ export class BenificiaryComponent implements OnInit {
    
   formValue!:FormGroup;
   
-  ELEMENT_DATA: benificiary[] = [
-    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
-    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
-    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
-    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
-    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
-    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
-    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
-    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
-    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
-    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
-    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
-    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
-    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
-    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
-    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
-    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
-    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
-    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
-    {position: 1, benAccNum: 1234543455, name: "Anudeep", nickname: 'Anu',userAccNum:23337872893},
-    {position: 2, benAccNum: 7877937333, name: "PAPKA", nickname: 'pa',userAccNum:1221233234},
-    {position: 3, benAccNum: 123444542, name: "madhuu", nickname: 'mad',userAccNum:12322432},
-    {position: 4, benAccNum: 1233254456, name: "ramudu", nickname: 'ram',userAccNum:43545654467},
-    {position: 5, benAccNum: 1234543455, name: "Anudeep", nickname: 'Angcfgu',userAccNum:23337872893},
-    {position: 6, benAccNum: 7877937333, name: "PAPKA", nickname: 'pvcvca',userAccNum:1221233234},
-  ]
-  constructor( private formbuilder:FormBuilder) { }
+
+  constructor( private formbuilder:FormBuilder, private benificiaryService: BenificiaryService,
+    private _snackBar: MatSnackBar) { }
+
+  getBeneficiaries() {
+    const user = JSON.parse(localStorage.getItem('user')!);
+
+    this.benificiaryService.getBenificiaries(user.accountnumber).subscribe((response) => {
+      const dataMapped = response.beneficiary.map((b, ind) => ({
+        position: ind + 1,
+        benAccNum: b.receiverAccNo,
+        name: b.name,
+        nickname: b.nick_name
+      }))
+      this.dataSource.data = dataMapped;
+    })
+  }
 
   ngOnInit(): void {
+
+    this.getBeneficiaries();
+
     this.formValue = this.formbuilder.group({
       benAccNum : [''],
       nickname  : [''] ,
-      name :[''],
-
+      name :['']
     })
   }
 
 
   displayedColumns = ['position', 'nickname'];
 
-  dataSource = new MatTableDataSource<benificiary>(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource<benificiary>([]);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  
 
   add() {
-    console.log(this.formValue.value)
-    this.formValue.reset();
+
+    const user = JSON.parse(localStorage.getItem('user')!);
+
+    const payload: BenificiaryPayload = {
+      myAccountNumber: user.accountnumber,
+      name: this.formValue.value.name,
+      nick_name: this.formValue.value.nickname,
+      receiverAccNo: this.formValue.value.benAccNum
+    }
+    
+    this.benificiaryService.addBenificiary(payload).subscribe({
+      next: () => {
+        this.formValue.reset();
+        this.getBeneficiaries();
+      },
+      error: (e) => {
+        this.formValue.reset();
+        this._snackBar.open(e.error, 'OK', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 5000
+        });
+      }
+    })
+  }
+
+  select(beneficiary: benificiary) {
+    SelectBeneficiary.trigger(beneficiary.benAccNum)
   }
 
 }

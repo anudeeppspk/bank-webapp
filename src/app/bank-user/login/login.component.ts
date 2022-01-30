@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
      }
 
     this.loginService.login(payload).subscribe(({
-      next: (response: any) => {
+      next: (response) => {
         this.isLoggingIn = false;
         this._snackBar.open('Login Successfully', 'OK', {
           horizontalPosition: 'end',

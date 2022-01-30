@@ -16,34 +16,24 @@
         <mat-cell *matCellDef="let benificiary"> {{benificiary.position}} </mat-cell>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="benAccNum">
-        <mat-header-cell *matHeaderCellDef> Benificiary Accountnumber </mat-header-cell>
-        <mat-cell *matCellDef="let benificiary"> {{benificiary.benAccNum}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let benificiary"> {{benificiary.name}} </mat-cell>
-      </ng-container> -->
-
-      <!-- Symbol Column -->
       <ng-container matColumnDef="nickname">
         <mat-header-cell *matHeaderCellDef> Nick Name </mat-header-cell>
-        <mat-cell *matCellDef="let benificiary"> {{benificiary.nickname}} </mat-cell>
-      </ng-container>
-
-      <!-- <ng-container matColumnDef="userAccNum">
-        <mat-header-cell *matHeaderCellDef> userAccNum </mat-header-cell>
-        <mat-cell *matCellDef="let benificiary"> {{benificiary.userAccNum}} </mat-cell>
-      </ng-container> -->
+        <mat-cell *matCellDef="let benificiary"> 
+          {{benificiary.nickname}}
+          <button type="button" (click)="select(benificiary)" class="btn btn-sm btn-primary">Select</button>
+          </mat-cell>
+        </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
     </mat-table>
-
-    <!-- <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-    </mat-paginator> -->
   </div>
+
+
+
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -72,20 +62,12 @@
               <input type="text" formControlName="nickname" class="form-control" id="exampleText3">
             </div>
 
-            <div class="form-grtextoup">
-              <label for="exampleText4">User Accountnumber</label>
-              <input type="text" formControlName="myaccnum" class="form-control" id="exampleText4">
-            </div>
-
-
-            <button type="button" (click)="add()" class="btn btn-primary">Add</button>
-
           </form>
 
         </div>
         <div class="modal-footer">
           <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
+          <button type="button" (click)="add()" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
         </div>
       </div>
     </div>

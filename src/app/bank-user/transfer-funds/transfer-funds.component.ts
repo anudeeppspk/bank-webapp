@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
 import { TransferFundsService } from 'src/app/services/transfer-funds/transfer-funds.service';
+import SelectBeneficiary from 'src/app/triggers/selectBeneficiary';
 
 @Component({
   selector: 'app-transfer-funds',
@@ -27,6 +28,19 @@ export class TransferFundsComponent implements OnInit {
   constructor(public transferFundService: TransferFundsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+    SelectBeneficiary.subscribe((benAccountNumber: string) => {
+      this.transferFundsForm.patchValue({
+        account_number: benAccountNumber,
+      })
+      this.transferFundService.searchAccountNumber(benAccountNumber).subscribe((account_data: any) => {
+        this.transferFundsForm.patchValue({
+          account_ifsc: account_data.account.ifsccode,
+          account_name: account_data.account.name,
+        })
+      });
+    })
+
   }
 
   clearSearchData() {
@@ -58,7 +72,7 @@ export class TransferFundsComponent implements OnInit {
     console.log("Send money function called");
     this.transferAmountLoadStates.isTransferLoading = true;
 
-    let user = JSON.parse(localStorage.getItem('user')!);
+    const user = JSON.parse(localStorage.getItem('user')!);
 
     this.transferFundService.transferAmount(user.accountnumber, this.transferFundsForm.getRawValue()).subscribe((data) => {
 

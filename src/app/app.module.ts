@@ -30,6 +30,7 @@ import { EasyLoginGuard } from './easy-login.guard';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { BenificiaryService } from './services/benificiary/benificiary.service';
 
 
 @NgModule({
@@ -64,7 +65,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatPaginatorModule
 
   ],
-  providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard],
+  providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard, BenificiaryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

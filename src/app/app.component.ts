@@ -25,8 +25,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      console.log(event.url)
-      this.toggleHeaderFooter(event.url)
+      this.toggleHeaderFooter(event.urlAfterRedirects)
     });
   }
 

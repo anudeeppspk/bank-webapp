@@ -1,7 +1,23 @@
 export interface benificiary {
     position: number;
-    benAccNum: number;
+    benAccNum: string;
     name: string;
     nickname: string;
-    userAccNum: number;
+}
+
+export interface BenificiaryResponse {
+    status: number;
+    beneficiary: {
+        receiverAccNo: string;
+        name: string;
+        nick_name: string;
+        myAccountNumber: string;
+    }[]
+}
+
+export interface BenificiaryPayload {
+    receiverAccNo: string;
+    name : string;
+    nick_name: string;
+    myAccountNumber: string;
 }
