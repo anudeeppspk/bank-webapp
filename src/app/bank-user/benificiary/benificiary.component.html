@@ -18,16 +18,16 @@
 
       <ng-container matColumnDef="nickname">
         <mat-header-cell *matHeaderCellDef> Nick Name </mat-header-cell>
-        <mat-cell *matCellDef="let benificiary"> 
+        <mat-cell *matCellDef="let benificiary">
           {{benificiary.nickname}}
           <button type="button" (click)="select(benificiary)" class="btn btn-sm btn-primary">Select</button>
-          </mat-cell>
-        </ng-container>
+        </mat-cell>
+      </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      
+
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    
+
     </mat-table>
   </div>
 
