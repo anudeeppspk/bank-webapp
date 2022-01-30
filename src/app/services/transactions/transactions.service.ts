@@ -11,7 +11,7 @@ export class TransactionsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTransactionDetails(): Observable<any> {
-    return this.httpClient.get<Object>(environment.baseURL + "/getTransactions");
+  getTransactionDetails(accountNumber: String): Observable<any> {
+    return this.httpClient.get<Object>(environment.baseURL + `/getTransactions?accountNumber=${accountNumber}`);
   }
 }

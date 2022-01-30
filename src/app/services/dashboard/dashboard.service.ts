@@ -12,12 +12,15 @@ export class DashboardService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAcountDetails(): Observable<any> {
-    let user = JSON.parse(localStorage.getItem('user')!);
-    return this.httpClient.get<Object>(environment.baseURL + `/accountDetails?accountNumber=${user.accountnumber}`);
+  getAcountDetails(accountNumber: string): Observable<any> {
+    return this.httpClient.get<Object>(environment.baseURL + `/accountDetails?accountNumber=${accountNumber}`);
   }
 
-  getUserDetails(): Observable<any> {
-    return this.httpClient.get<Object>(environment.baseURL + "/getUser");
+  getUserDetails(accountNumber: string): Observable<any> {
+    let body = {
+      accountNumber: accountNumber
+    }
+
+    return this.httpClient.post<any>(environment.baseURL + "/getUser", body);
   }
 }

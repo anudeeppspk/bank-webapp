@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       lastname: this.signupForm.value.lastName,
       phonenumber: this.signupForm.value.mobile
     }
-    
+
     this.signupService.signup(payload).subscribe(({
       next: (response) => {
         this.isSignIn = false;
@@ -61,8 +61,8 @@ export class SignupComponent implements OnInit {
           this.router.navigate(["login"])
           return;
         }
-      }, error: (e) => {
-        this._snackBar.open('Account already registered', 'OK', {
+      }, error: (err) => {
+        this._snackBar.open(err.error, 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000

@@ -49,18 +49,17 @@ export class LoginComponent implements OnInit {
      }
 
     this.loginService.login(payload).subscribe(({
-      next: (response) => {
+      next: (response: any) => {
         this.isLoggingIn = false;
         this._snackBar.open('Login Successfully', 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000
         });
-        
-        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('user', JSON.stringify(response.account));
         this.router.navigate(['home']);
-      }, error: (e) => {
-        this._snackBar.open('Username does not exists', 'OK', {
+      }, error: (err) => {
+        this._snackBar.open(err.error.message, 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000
