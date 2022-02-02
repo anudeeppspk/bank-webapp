@@ -27,6 +27,8 @@ import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service'
 import { AuthGuard } from './auth.guard';
 import { EasyLoginGuard } from './easy-login.guard';
+import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
+import { ApproveDeclineCellComponent } from './common/components/approve-decline-cell/approve-decline-cell.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { EasyLoginGuard } from './easy-login.guard';
     DashboardComponent,
     TranscationsComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    RequestMoneyComponent,
+    ApproveDeclineCellComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,7 @@ import { EasyLoginGuard } from './easy-login.guard';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ApproveDeclineCellComponent]),
   ],
   providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard],
   bootstrap: [AppComponent]
