@@ -27,6 +27,10 @@ export class ProfileComponent implements OnInit {
     new_password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  updateLimitForm = new FormGroup({
+    set_limit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
+  });
+
   constructor(private profileService: ProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -77,6 +81,10 @@ export class ProfileComponent implements OnInit {
       return;
     });
 
+  }
+  updateLimit()
+  {
+    console.warn(this.updateLimitForm.value)
   }
 
 }
