@@ -63,6 +63,8 @@ import { BenificiaryService } from './services/benificiary/benificiary.service';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
     AgGridModule.withComponents([ApproveDeclineCellComponent]),
   ],
   providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard, BenificiaryService],
