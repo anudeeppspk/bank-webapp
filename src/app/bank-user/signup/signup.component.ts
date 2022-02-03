@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   encapsulation: ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
-  step: any=1;
+  step: any = 1;
   signupForm!: FormGroup;
   securityQuestions!: FormGroup;
   userDetails!: FormGroup;
@@ -23,25 +23,23 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-        firstName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
-        lastName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
-        mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]],
-      
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
+      mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]],
       securityquestion1: ['', [Validators.required]],
-      securityquestion2: ['', [Validators.required,Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]]
-      
-    })
+      securityquestion2: ['', [Validators.required, Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]]
+    });
   }
   get formControls(): { [key: string]: AbstractControl } {
     return this.signupForm.controls;
   }
-  onPrevious(){
-    this.step=this.step-1;
+  onPrevious() {
+    this.step = this.step - 1;
   }
-  onNext(){
-    this.step=this.step+1;
+  onNext() {
+    this.step = this.step + 1;
   }
   onSubmit() {
     this.signupForm.markAllAsTouched()
@@ -60,7 +58,7 @@ export class SignupComponent implements OnInit {
       securityquestion1: this.signupForm.value.securityquestion1,
       securityquestion2: this.signupForm.value.securityquestion2
     }
-    
+
     this.signupService.signup(payload).subscribe({
       next: (response) => {
         this.isSignIn = false;
