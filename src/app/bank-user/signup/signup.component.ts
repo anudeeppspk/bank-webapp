@@ -57,8 +57,8 @@ export class SignupComponent implements OnInit {
       firstname: this.signupForm.value.firstName,
       lastname: this.signupForm.value.lastName,
       phonenumber: this.signupForm.value.mobile,
-      securityquestionone: this.signupForm.value.securityquestion1,
-      securityquestiontwo: this.signupForm.value.securityquestion2
+      securityquestion1: this.signupForm.value.securityquestion1,
+      securityquestion2: this.signupForm.value.securityquestion2
     }
     
     this.signupService.signup(payload).subscribe({
