@@ -5,11 +5,12 @@
     </div>
     
     <div class="mt-3 d-flex justify-content-center align-items-center">
-        <div class="px-2 py-2 mx-5 card text-left" style="width: 20.25rem;">
-            <h5 class="px-3 mt-3 card-title">Sign Up</h5>
+        <div class="px-2 py-2 mx-5 card text-left" style="width: 30.25rem;">
+            <h4 class="text-center"><b>Sign Up</b></h4>
             <div class="card-body">
                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    
+                    <div *ngIf="step==1">
+                        <h5>User Details</h5>
                     <div class="form-group">
                         <label for="firstname"><small>Firstname</small></label>
                         <input type="text" placeholder="Enter FirstName" class="form-control" id="firstname" formControlName="firstName"
@@ -72,13 +73,43 @@
                         </div>
     
                     </div>
+                    </div>
+                    <div *ngIf="step==2">
+                        <h5>Security Questions</h5>
+                    <div class="form-group">
+                        <label for="securityquestion1"><small>What is your Date of Birth?</small></label>
+                        <input type="date" placeholder="DD-MM-YYYY" class="form-control" id="securityquestion1" formControlName="securityquestion1"
+                            [ngClass]="{ 'is-invalid': (formControls['securityquestion1'].touched || formControls['securityquestion1'].dirty) && formControls['securityquestion1'].errors }">
+    
+                        <div *ngIf="formControls['securityquestion1'].errors" class="invalid-feedback">
+                            <div *ngIf="formControls['securityquestion1'].errors['required']">This is a required feild</div>
+                        </div>
+    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="securityquestion2"><small>What is your Place of Birth?</small></label>
+                        <input type="text" placeholder="Place of Birth" class="form-control" id="securityquestion2" formControlName="securityquestion2"
+                            [ngClass]="{ 'is-invalid': (formControls['securityquestion2'].touched || formControls['securityquestion2'].dirty) && formControls['securityquestion2'].errors }">
+    
+                        <div *ngIf="formControls['securityquestion2'].errors" class="invalid-feedback">
+                            <div *ngIf="formControls['securityquestion2'].errors['required']">This is a required feild</div>
+                            <div *ngIf="formControls['securityquestion2'].errors['pattern']">Try to answer in one word</div>
+                        </div>
+    
+                    </div>
+                    </div>
+
+
                     <!-- <div class="form-group">
                         <label for="inputPassword4"><small>Take a Selfie</small></label>
                         <app-selfie-panel></app-selfie-panel>
                     </div> -->
                     <br>
                     <div class="form-group text-center">
-                        <button [disabled]="isSignIn" type="submit" class="btn btn-primary">
+                        <a class="btn btn-primary mx-2" *ngIf="step==2" (click)="onPrevious()">Previous</a>
+                        <button type="submit" class="btn btn-primary mx-2" *ngIf="step==1" (click)="onNext()">Next</button>
+                        <button [disabled]="isSignIn" type="submit" class="btn btn-primary" *ngIf="step==2">
                             <span *ngIf="isSignIn" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             SIGN UP
                         </button>
