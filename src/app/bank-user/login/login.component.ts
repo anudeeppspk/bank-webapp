@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn = true;
 
      const payload = {
-      userName: this.loginForm.value.email,
+      username: this.loginForm.value.email,
       password: this.loginForm.value.password
      }
 

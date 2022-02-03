@@ -1,5 +1,5 @@
 export interface login{
-    userName:string,
+    username:string,
     password:string
 } 
 
