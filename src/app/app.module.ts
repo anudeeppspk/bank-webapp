@@ -27,6 +27,8 @@ import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service'
 import { AuthGuard } from './auth.guard';
 import { EasyLoginGuard } from './easy-login.guard';
+import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
+import { ApproveDeclineCellComponent } from './common/components/approve-decline-cell/approve-decline-cell.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -48,7 +50,8 @@ import { BenificiaryService } from './services/benificiary/benificiary.service';
     ErrorDialogComponent,
     SuccessDialogComponent,
     BenificiaryComponent,
-    
+    RequestMoneyComponent,
+    ApproveDeclineCellComponent
   ],
   imports: [
     BrowserModule,
@@ -60,10 +63,7 @@ import { BenificiaryService } from './services/benificiary/benificiary.service';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
-    AgGridModule.withComponents([]),
-    MatTableModule,
-    MatPaginatorModule
-
+    AgGridModule.withComponents([ApproveDeclineCellComponent]),
   ],
   providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard, BenificiaryService],
   bootstrap: [AppComponent]

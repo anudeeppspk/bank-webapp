@@ -2,32 +2,21 @@
 
     <!-- Body -->
     <div class="container">
-
-        <div class="row my-4 py-4">
-            <div class="col-4">
-                <div class="d-flex justify-content-center">
-                    <span class="heading">Transfer Funds</span>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="row">
-            <div class="col-4">
-                <div class="card shadow rounded d-flex">
-                    <div class="mx-4 my-4">
-                        <form [formGroup]="transferFundsForm">
-                            <div class="row my-2">
-                                <div>
-                                    <label for="account_number" class="text-secondary label-name">Account
-                                        Number</label>
-                                </div>
-                                <div class="col-12 d-flex justify-content-between">
-                                    <input type="text" (keydown)="clearSearchData()" class="col-10 p-2"
-                                        id="account_number" formControlName="account_number" />
-                                    <button (click)="searchAccount()" class="col-1 mx-2 search-box">
-                                        <div class="spinner">
-                                            <mat-spinner *ngIf="transferAmountLoadStates.isSearchLoading"
-                                                diameter=20></mat-spinner>
+            <div class="col-12">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <span class="heading">Send Money</span>
+                        </div>
+                        <div class="card shadow rounded d-flex">
+                            <div class="mx-4 my-4">
+                                <form [formGroup]="transferFundsForm">
+                                    <div class="row my-2">
+                                        <div>
+                                            <label for="account_number" class="text-secondary label-name">Account
+                                                Number</label>
                                         </div>
                                         <img *ngIf="!transferAmountLoadStates.isSearchLoading"
                                             src="assets/search.svg" alt="search">
@@ -100,10 +89,50 @@
                         </button>
                         <!-- <a routerLink="/benificiary">ADD BENIFICIARY</a> -->
                     </div>
-
+                    <div class="col-5">
+                        <div class="d-flex justify-content-center">
+                            <table><tr>
+                            <span class="heading">Money Request</span>  
+                            <select name="status" class="selclass"(change)="selectedStatus($event)">
+                                <option value="PENDING">Pending</option>
+                                <option value="COMPLETED">Paid</option>
+                                <option value="DECLINED">Declined</option>
+                            </select>
+                            </table>
+                        </div>
+                        <div class="card shadow rounded d-flex">
+                            <div *ngIf="selStatus=='PENDING';else idTemplate">
+                                <div class="d-flex justify-content-center">
+                                    <div class="ag-theme-balham">
+                                        <ag-grid-angular *ngIf="rowData.length > 0" style="width: 460px; height:450px;" class="ag-grid" [rowData]="rowData"
+                                            [columnDefs]="columnDef" [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true"
+                                            [frameworkComponents]="frameworkComponents">
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #idTemplate>
+                                <div *ngIf="selStatus=='COMPLETED';else idTemplate2">
+                                <div class="ag-theme-balham">
+                                    <ag-grid-angular *ngIf="completedRow.length > 0" style="width: 460px; height:450px;" class="ag-grid" [rowData]="completedRow "
+                                        [columnDefs]="completedDef" [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true"
+                                        [frameworkComponents]="frameworkComponents">
+                                    </ag-grid-angular>
+                                </div>
+                                </div>
+                                <ng-template #idTemplate2>
+                                    <div class="ag-theme-balham">
+                                        <ag-grid-angular *ngIf="declinedRow.length > 0" style="width: 460px; height:450px;" class="ag-grid" [rowData]="declinedRow "
+                                            [columnDefs]="declinedDef" [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true"
+                                            [frameworkComponents]="frameworkComponents">
+                                        </ag-grid-angular>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+                    </div>
                 </div>
             </div> 
-            <div class="col-1"></div>
             <div class="col-4">
                 <app-benificiary></app-benificiary>
             </div> 

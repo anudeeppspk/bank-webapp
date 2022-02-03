@@ -1,4 +1,6 @@
-
+.container {
+    height: 100vh;
+}
 
 .label-name {
     font-size: 12px;
@@ -38,8 +40,4 @@
 .error-text {
     color: red;
     font-size: 12px;
-}
-.selclass{
-    height: 30px;
-    width: 90px;
 }

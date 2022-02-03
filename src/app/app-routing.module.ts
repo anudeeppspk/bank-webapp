@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
+import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
 import { ProfileComponent } from './bank-user/profile/profile.component';
@@ -49,10 +50,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "**",
+    path:"request-money",
+    component: RequestMoneyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:"**",
     redirectTo: 'login'
   }
-
 ];
 
 @NgModule({
