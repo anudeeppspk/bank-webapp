@@ -27,6 +27,7 @@ import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service'
 import { AuthGuard } from './auth.guard';
 import { EasyLoginGuard } from './easy-login.guard';
+import { ForgotpasswordComponent } from './bank-user/forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EasyLoginGuard } from './easy-login.guard';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    ForgotpasswordComponent,
     ProfileComponent,
     TransferFundsComponent,
     SignupComponent,
