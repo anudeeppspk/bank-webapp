@@ -12,6 +12,7 @@ import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-fund
 import { EasyLoginGuard } from './easy-login.guard';
 import { BenificiaryComponent } from "./bank-user/benificiary/benificiary.component"
 
+import { HelpComponent } from './bank-user/help/help.component';
 
 const routes: Routes = [
   {
@@ -50,12 +51,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"request-money",
+    path: "request-money",
     component: RequestMoneyComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:"**",
+    path: "help",
+    component: HelpComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: "**",
     redirectTo: 'login'
   }
 ];

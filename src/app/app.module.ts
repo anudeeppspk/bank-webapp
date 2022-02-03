@@ -34,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { BenificiaryService } from './services/benificiary/benificiary.service';
 
+import { HelpComponent } from './bank-user/help/help.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { BenificiaryService } from './services/benificiary/benificiary.service';
     SuccessDialogComponent,
     BenificiaryComponent,
     RequestMoneyComponent,
-    ApproveDeclineCellComponent
+    ApproveDeclineCellComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
