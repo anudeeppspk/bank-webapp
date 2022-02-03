@@ -96,6 +96,47 @@ export class ForgotpasswordComponent implements OnInit {
     }))
   }
 
+  // resetPassword(){
+  //   console.log(this.forgotPasswordForm.getRawValue());
+    
+  //   if (!this.resetPasswordForm.valid){
+  //     let error_message = 'Invalid Details';
+
+  //     if(this.forgotPasswordForm.get('email')?.valid && this.forgotPasswordForm.get('securityquestion1')?.valid && this.forgotPasswordForm.get('securityquestion2')){
+  //       error_message = 'Invalid Details';
+  //     }
+
+  //     this.dialog.open(ErrorDialogComponent, {
+  //       data: { errorMessage: error_message },
+  //       width: '30%',
+  //     });
+  //     return;
+  //   }
+  //   console.log("Updating Password");
+  //   this.isUpdating=true;
+
+  //   let user = JSON.parse(localStorage.getItem('user')!);
+    
+  //   this.forgotpassService.resetPassword(this.forgotPasswordForm.getRawValue()).subscribe((data)=>{
+  //     console.log(data);
+  //     this.forgotPasswordForm.reset();
+  //     this.dialog.open(SuccessDialogComponent, {
+  //       data: { successMessage: "Updated successfully." },
+  //       width: '30%',
+  //     });
+  //     this.isUpdating=false;
+  //   },(err)=>{
+  //     console.log(err);
+  //     this.dialog.open(ErrorDialogComponent, {
+  //       data: { errorMessage: err.error.message },
+  //       width: '30%',
+  //     });
+  //     this.isUpdating=false;
+  //   });
+  // }
+
+
+  //orginal code
   // resetPassword() {
 
   //   if (!this.resetPasswordForm.valid) {
