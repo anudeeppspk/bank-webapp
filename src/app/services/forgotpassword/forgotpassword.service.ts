@@ -15,13 +15,16 @@ export class ForgotPasswordService {
         return this.httpClient.get<Object>(environment.baseURL + `/getBankUser?email=${email}`);
     }
     
-    resetPassword(email: string, newpassword: string): Observable<HttpResponse<string>> {
+    // resetPassword(email: string, newpassword: string): Observable<HttpResponse<string>> {
 
-        let body = {
-            email: email,
-            newpassword: newpassword
-        }
-        return this.httpClient.post<any>(environment.baseURL + "/resetPassword", body);
+    //     let body = {
+    //         email: email,
+    //         newpassword: newpassword
+    //     }
+    //     return this.httpClient.post<any>(environment.baseURL + "/resetPassword", body);
+    // }
+    resetPassword(payload: forgotpw){
+        return this.httpClient.post<any>(environment.baseURL + "/resetPassword", payload);
     }
 
 }

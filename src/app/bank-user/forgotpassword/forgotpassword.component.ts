@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/error-dialog.component';
+//import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/error-dialog.component';
 import { ForgotPasswordService } from 'src/app/services/forgotpassword/forgotpassword.service';
-import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
+//import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-forgotpassword',
@@ -13,11 +16,9 @@ import { SuccessDialogComponent } from 'src/app/common/components/success-dialog
 })
 export class ForgotpasswordComponent implements OnInit {
 
-  resetPasswordLoadStates = {
-    isLoading: false,
-  }
-
   resetPasswordForm !: FormGroup;
+  isUpdating=false;
+  
 
   //forgotPasswordForm !: FormGroup;
 
@@ -29,7 +30,7 @@ export class ForgotpasswordComponent implements OnInit {
     // confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
   })
 
-  constructor(private forgotpassService: ForgotPasswordService, private formBuilder: FormBuilder, private router: Router, public dialog: MatDialog) { }
+  constructor(private forgotpassService: ForgotPasswordService, private formBuilder: FormBuilder, private router: Router, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -65,44 +66,61 @@ export class ForgotpasswordComponent implements OnInit {
       return;
     }
 
+    this.isUpdating=true;
+    
     const payload = {
       email: this.forgotPasswordForm.value.email,
       securityquestion1: this.forgotPasswordForm.value.securityquestion1,
       securityquestion2: this.forgotPasswordForm.value.securityquestion2,
       newpassword: this.forgotPasswordForm.value.newpassword,
-      // currentpassword: this.forgotPasswordForm.value.currentpassword
-    }
-  }
-
-  resetPassword() {
-
-    if (!this.resetPasswordForm.valid) {
-      this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: 'Please fill in the details properly.' },
-        width: '30%',
-      });
-      return;
+      // currentpassword: this.forgotPasswordForm.value.currentpassword      
     }
 
-    console.log("reset password function is called");
-    let forgotpassword_data = this.resetPasswordForm.getRawValue();
-    this.resetPasswordLoadStates.isLoading = true;
-    let bankuser = JSON.parse(localStorage.getItem('bankuser')!);
-    this.forgotpassService.resetPassword(bankuser.email, forgotpassword_data.newpassword).subscribe((data) => {
-      console.log(data);
-      this.forgotPasswordForm.reset();
-      this.dialog.open(SuccessDialogComponent, {
-        data: { successMessage: 'Passowrd has been reset successfully.' },
-        width: '30%',
-      });
-      this.resetPasswordLoadStates.isLoading = false;
-    }, (err) => {
-      console.log(err);
-      this.dialog.open(ErrorDialogComponent, {
-        data: { errorMessage: err.error },
-        width: '30%',
-      });
-      return;
-    });
+    this.forgotpassService.resetPassword(payload).subscribe(({
+       next:(response: any)=>{
+        this.isUpdating=false;
+        this._snackBar.open('Update Successful!', 'OK', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+
+       });
+       localStorage.setItem('user', JSON.stringify(response.account));
+        this.router.navigate(['home']);
+      }, error: (err: { error: { message: 'Not Found'; }; }) => {
+        this._snackBar.open(err.error.message, 'OK(not found)', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+        });
+        this.isUpdating=false;
+      }
+    }))
   }
+
+  // resetPassword() {
+
+  //   if (!this.resetPasswordForm.valid) {
+  //     this.dialog.open(ErrorDialogComponent, {
+  //       data: { errorMessage: 'Please fill in the details properly.' },
+  //       width: '30%',
+  //     });
+  //   }
+
+  //   console.log("reset password function is called");
+  //   let forgotpassword_data = this.resetPasswordForm.getRawValue();
+  //   let bankuser = JSON.parse(localStorage.getItem('bankuser')!);
+  //   this.forgotpassService.resetPassword(bankuser.email, forgotpassword_data.newpassword).subscribe((data) => {
+  //     console.log(data);
+  //     this.forgotPasswordForm.reset();
+  //     this.dialog.open(SuccessDialogComponent, {
+  //       data: { successMessage: 'Passowrd has been reset successfully.' },
+  //       width: '30%',
+  //     });
+  //   }, (err) => {
+  //     console.log(err);
+  //     this.dialog.open(ErrorDialogComponent, {
+  //       data: { errorMessage: err.error },
+  //       width: '30%',
+  //     });
+  //   });
+  // }
 }       
