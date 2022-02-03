@@ -4,6 +4,6 @@ export interface Signup {
     lastname: string,
     phonenumber: string,
     password: string,
-    securityquestionone: Date,
-    securityquestiontwo: string
+    securityquestion1: Date,
+    securityquestion2: string
 }
