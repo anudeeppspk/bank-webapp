@@ -17,34 +17,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ForgotpasswordComponent implements OnInit {
 
   resetPasswordForm !: FormGroup;
-  isUpdating=false;
+  isUpdating: boolean=false;
   
 
   //forgotPasswordForm !: FormGroup;
 
-  forgotPasswordForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    securityquestion1: new FormControl('', [Validators.required]),
-    securityquestion2: new FormControl('', [Validators.required]),
-    newpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]),
-    // confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
-  })
+  // forgotPasswordForm = new FormGroup({
+  //   email: new FormControl('', [Validators.required, Validators.email]),
+  //   securityquestion1: new FormControl('', [Validators.required]),
+  //   securityquestion2: new FormControl('', [Validators.required]),
+  //   newpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]),
+  //   // confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
+  // })
 
   constructor(private forgotpassService: ForgotPasswordService, private formBuilder: FormBuilder, private router: Router, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
-    let bankuser = JSON.parse(localStorage.getItem('bankuser')!);
-    this.forgotpassService.getUser(bankuser.email).subscribe((data: any) => {
-      console.log(data);
-    });
+    // let bankuser = JSON.parse(localStorage.getItem('bankuser')!);
+    // this.forgotpassService.getUser(bankuser.email).subscribe((data: any) => {
+    //   console.log(data);
+    // });
 
-    // this.forgotPasswordForm = this.formBuilder.group({
-    //   email: ['', [Validators.required, Validators.email]],
-    //   securityquestion1: ['', [Validators.required]],
-    //   securityquestion2: ['', [Validators.required, Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]],
-    //   newpassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]]
-    // })
+    this.resetPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      securityquestion1: ['', [Validators.required]],
+      securityquestion2: ['', [Validators.required, Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]],
+      newpassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]]
+    })
   }
 
   getErrorValue(errors: any): any {
@@ -56,23 +56,23 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   get formControls(): { [key: string]: AbstractControl } {
-    return this.forgotPasswordForm.controls;
+    return this.resetPasswordForm.controls;
   }
 
 
   onSubmit() {
-    this.forgotPasswordForm.markAllAsTouched()
-    if (this.forgotPasswordForm.invalid) {
+    this.resetPasswordForm.markAllAsTouched()
+    if (this.resetPasswordForm.invalid) {
       return;
     }
 
     this.isUpdating=true;
     
     const payload = {
-      email: this.forgotPasswordForm.value.email,
-      securityquestion1: this.forgotPasswordForm.value.securityquestion1,
-      securityquestion2: this.forgotPasswordForm.value.securityquestion2,
-      newpassword: this.forgotPasswordForm.value.newpassword,
+      email: this.resetPasswordForm.value.email,
+      securityquestion1: this.resetPasswordForm.value.securityquestion1,
+      securityquestion2: this.resetPasswordForm.value.securityquestion2,
+      newpassword: this.resetPasswordForm.value.newpassword,
       // currentpassword: this.forgotPasswordForm.value.currentpassword      
     }
 
@@ -117,10 +117,10 @@ export class ForgotpasswordComponent implements OnInit {
 
   //   let user = JSON.parse(localStorage.getItem('user')!);
     
-  //   this.forgotpassService.resetPassword(this.forgotPasswordForm.getRawValue()).subscribe((data)=>{
+  //   this.forgotpassService.resetPassword(user.email, forgotpassword_data.newpassword.subscribe((data)=>{
   //     console.log(data);
   //     this.forgotPasswordForm.reset();
-  //     this.dialog.open(SuccessDialogComponent, {
+  //     this.dialog.open(SuccessDialogComponent, {  
   //       data: { successMessage: "Updated successfully." },
   //       width: '30%',
   //     });
@@ -136,7 +136,7 @@ export class ForgotpasswordComponent implements OnInit {
   // }
 
 
-  //orginal code
+  //orginal
   // resetPassword() {
 
   //   if (!this.resetPasswordForm.valid) {

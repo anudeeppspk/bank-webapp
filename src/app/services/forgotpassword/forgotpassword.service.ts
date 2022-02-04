@@ -23,8 +23,11 @@ export class ForgotPasswordService {
     //     }
     //     return this.httpClient.post<any>(environment.baseURL + "/resetPassword", body);
     // }
-    resetPassword(payload: forgotpw){
-        return this.httpClient.post<any>(environment.baseURL + "/resetPassword", payload);
+    resetPassword(payload: forgotpw): Observable<Object>{
+        return this.httpClient.post<any>(environment.baseURL + "/updatePassword", payload);
     }
+    // resetPassword(newpassword: string): Observable<Object>{
+    //     return this.httpClient.post<any>(environment.baseURL + "/resetPassword", newpassword);
+    // }
 
 }
