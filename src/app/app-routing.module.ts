@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
+import { ForgotpasswordComponent } from './bank-user/forgotpassword/forgotpassword.component';
 import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent,
     canActivate: [EasyLoginGuard]
+  },
+  {
+    path: "forgotPassword",
+    component: ForgotpasswordComponent
   },
   {
     path: "signup",
