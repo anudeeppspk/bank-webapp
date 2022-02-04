@@ -22,11 +22,20 @@ import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { ErrorDialogComponent } from './common/components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './common/components/success-dialog/success-dialog.component';
-
+import { BenificiaryComponent } from '../app/bank-user/benificiary/benificiary.component';
 import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service'
 import { AuthGuard } from './auth.guard';
 import { EasyLoginGuard } from './easy-login.guard';
+import { ForgotpasswordComponent } from './bank-user/forgotpassword/forgotpassword.component';
+import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
+import { ApproveDeclineCellComponent } from './common/components/approve-decline-cell/approve-decline-cell.component';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { BenificiaryService } from './services/benificiary/benificiary.service';
+
+import { HelpComponent } from './bank-user/help/help.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +43,7 @@ import { EasyLoginGuard } from './easy-login.guard';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    ForgotpasswordComponent,
     ProfileComponent,
     TransferFundsComponent,
     SignupComponent,
@@ -41,7 +51,11 @@ import { EasyLoginGuard } from './easy-login.guard';
     DashboardComponent,
     TranscationsComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    BenificiaryComponent,
+    RequestMoneyComponent,
+    ApproveDeclineCellComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +67,11 @@ import { EasyLoginGuard } from './easy-login.guard';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSnackBarModule,
-    AgGridModule.withComponents([]),
+    MatTableModule,
+    MatPaginatorModule,
+    AgGridModule.withComponents([ApproveDeclineCellComponent]),
   ],
-  providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard],
+  providers: [LoginService, SignupService, AuthGuard, EasyLoginGuard, BenificiaryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

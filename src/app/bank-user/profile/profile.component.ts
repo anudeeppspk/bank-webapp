@@ -27,13 +27,22 @@ export class ProfileComponent implements OnInit {
     new_password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  updateLimitLoadStates = {
+    isLoading: false,
+  }
+
+  updateLimitForm = new FormGroup({
+    set_limit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
+  });
+
   constructor(private profileService: ProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.profileService.getProfileDetails().subscribe((data) => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.getProfileDetails(user.accountnumber).subscribe((data: any) => {
       console.log(data);
-      this.full_name = data.firstname + " " + data.lastname;
-      this.profileDetails = data;
+      this.full_name = data.user.firstname + " " + data.user.lastname;
+      this.profileDetails = data.user;
     });
   }
 
@@ -58,7 +67,8 @@ export class ProfileComponent implements OnInit {
     console.log("update password function called");
     let password_data = this.updatePasswordForm.getRawValue();
     this.updatePasswordLoadStates.isLoading = true;
-    this.profileService.updatePassword(password_data.current_password, password_data.new_password).subscribe((data) => {
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.updatePassword(user.accountnumber, password_data.current_password, password_data.new_password).subscribe((data) => {
       console.log(data);
       this.updatePasswordForm.reset();
       this.dialog.open(SuccessDialogComponent, {
@@ -75,6 +85,39 @@ export class ProfileComponent implements OnInit {
       return;
     });
 
+  }
+  updateLimit()
+  {
+
+    if (!this.updateLimitForm.valid) {
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: 'Please fill in the details properly.' },
+        width: '30%',
+      });
+      return;
+    }
+
+
+    console.log("update limit function called");
+    let limit = this.updateLimitForm.getRawValue()
+    this.updateLimitLoadStates.isLoading = true;
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.updateLimit(limit.set_limit,user.accountnumber).subscribe((data) => {
+      console.log(data);
+      this.updateLimitForm.reset();
+      this.dialog.open(SuccessDialogComponent, {
+        data: { successMessage: 'Limit has been updated successfully.' },
+        width: '30%',
+      });
+       this.updateLimitLoadStates.isLoading = false;
+    }, (err) => {
+      console.log(err);
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: err.error },
+        width: '30%',
+      });
+      return;
+    });
   }
 
 }

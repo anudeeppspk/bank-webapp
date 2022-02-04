@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './bank-user/dashboard/dashboard.component';
+import { ForgotpasswordComponent } from './bank-user/forgotpassword/forgotpassword.component';
+import { RequestMoneyComponent } from './bank-user/request-money/request-money.component';
 
 import { LoginComponent } from './bank-user/login/login.component';
 import { ProfileComponent } from './bank-user/profile/profile.component';
@@ -9,7 +11,9 @@ import { SignupComponent } from './bank-user/signup/signup.component';
 import { TranscationsComponent } from './bank-user/transcations/transcations.component';
 import { TransferFundsComponent } from './bank-user/transfer-funds/transfer-funds.component';
 import { EasyLoginGuard } from './easy-login.guard';
+import { BenificiaryComponent } from "./bank-user/benificiary/benificiary.component"
 
+import { HelpComponent } from './bank-user/help/help.component';
 
 const routes: Routes = [
   {
@@ -21,6 +25,10 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent,
     canActivate: [EasyLoginGuard]
+  },
+  {
+    path: "forgotPassword",
+    component: ForgotpasswordComponent
   },
   {
     path: "signup",
@@ -38,20 +46,29 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"home",
+    path: "home",
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:"transactions",
+    path: "transactions",
     component: TranscationsComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:"**",
+    path: "request-money",
+    component: RequestMoneyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "help",
+    component: HelpComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: "**",
     redirectTo: 'login'
   }
-  
 ];
 
 @NgModule({

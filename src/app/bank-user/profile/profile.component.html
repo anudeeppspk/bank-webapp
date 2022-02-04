@@ -1,6 +1,4 @@
 <div>
-    <!-- Header -->
-    <app-header></app-header>
 
     <!-- Body -->
     <div class="container">
@@ -132,12 +130,54 @@
 
                     </div>
                 </div>
+                <div class="col-4">
+                    <div class="card shadow rounded d-flex">
+
+                        <p class="card-heading m-4">Set Transaction Limit</p>
+
+                        <div class="mx-4">
+                            <form [formGroup]="updateLimitForm">
+                                <div class="row my-2">
+                                    <div>
+                                        <label for="set_limit" class="text-secondary label-name">Set
+                                            Limit</label>
+                                    </div>
+                                    <div>
+                                        <input class="col-12 p-2" id="set_limit" type="text" placeholder="Enter Limit"
+                                            formControlName="set_limit" tooltipPosition="bottom"
+                                            tooltipEvent="focus" />
+                                            <div
+                                            *ngIf="updateLimitForm.get('set_limit')?.invalid && (updateLimitForm.get('set_limit')?.dirty || updateLimitForm.get('set_limit')?.touched)">
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updateLimitForm.get('set_limit')?.errors?.['required']">
+                                                Limit is required.
+                                            </span>
+                                            <span class="error-text m-0 p-0"
+                                                *ngIf="updateLimitForm.get('set_limit')?.errors?.['pattern']">
+                                                Only Numbers are allowed
+                                            </span>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <button type="button" class="btn btn-primary" (click)="updateLimit()"  >
+                                <div class="password_spinner mx-5">
+                                    <mat-spinner *ngIf="updateLimitLoadStates.isLoading" diameter=20></mat-spinner>
+                                </div>
+                                <span *ngIf="!updateLimitLoadStates.isLoading">Set Limit</span>
+                                <!-- <span>Set Limit</span> -->
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
-
-    <!-- Footer -->
-    <app-footer></app-footer>
 
 </div>

@@ -1,0 +1,43 @@
+.container {
+    height: 80vh;
+}
+
+.label-name {
+    font-size: 12px;
+}
+
+.card {
+    background-color: #fbfbfb;
+}
+
+.heading {
+    font-size: 30px;
+}
+
+.search-box {
+    height: 40px;
+    width: 40px;
+    background: #ffffff;
+    border: 1px solid #bbbfc7;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.dark-box {
+    mix-blend-mode: darken;
+}
+
+.spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #000000;
+}
+
+.transfer_spinner ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: white;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+}

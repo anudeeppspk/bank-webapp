@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AccountDetails } from '../../models/account-details';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
@@ -15,18 +16,21 @@ export class DashboardComponent implements OnInit {
   acc_ifsc: any;
   acc_branch: any;
   balance: any;
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,  private router: Router) { }
 
   ngOnInit(): void {
-    this.dashboardService.getAcountDetails().subscribe((account_data) => {
-      this.acc_number = account_data.accountnumber;
-      this.acc_ifsc = account_data.ifsccode;
-      this.acc_branch = account_data.branchname;
-      this.balance = account_data.balance;
+
+    let user = JSON.parse(localStorage.getItem('user')!);
+
+    this.dashboardService.getAcountDetails(user.accountnumber).subscribe((account_data) => {
+      this.acc_number = account_data.account.accountnumber;
+      this.acc_ifsc = account_data.account.ifsccode;
+      this.acc_branch = account_data.account.branchname;
+      this.balance = account_data.account.balance;
     });
 
-    this.dashboardService.getUserDetails().subscribe(user_data => {
-      this.full_name = user_data.firstname + " " + user_data.lastname;
+    this.dashboardService.getUserDetails(user.accountnumber).subscribe(user_data => {
+      this.full_name = user_data.user.firstname + " " + user_data.user.lastname;
     });
 
   }

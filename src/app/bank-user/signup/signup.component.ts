@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   encapsulation: ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
-  step: any=1;
+  step: any = 1;
   signupForm!: FormGroup;
   securityQuestions!: FormGroup;
 
@@ -22,38 +22,38 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-        firstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
-        lastName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
-        mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
+      firstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
+      lastName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
+      mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
     })
-    this.securityQuestions= this.formBuilder.group({
+    this.securityQuestions = this.formBuilder.group({
       securityquestion1: ['', [Validators.required]],
-      securityquestion2: ['', [Validators.required,Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]]
+      securityquestion2: ['', [Validators.required, Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]]
     })
   }
   get formControls(): { [key: string]: AbstractControl } {
     return this.signupForm.controls;
   }
-  get formcontrols(): { [key: string]: AbstractControl }{
+  get formcontrols(): { [key: string]: AbstractControl } {
     return this.securityQuestions.controls;
   }
 
-  onPrevious(){
-    this.step=this.step-1;
+  onPrevious() {
+    this.step = this.step - 1;
   }
-  onNext(){
+  onNext() {
     this.signupForm.markAllAsTouched()
-    if(this.signupForm.valid){
-      
-        this.step=this.step+1;
-      
+    if (this.signupForm.valid) {
+
+      this.step = this.step + 1;
+
     }
   }
-  
+
   onSubmit() {
-    
+
     this.securityQuestions.markAllAsTouched()
     if (this.securityQuestions.invalid) {
       return;
@@ -70,7 +70,7 @@ export class SignupComponent implements OnInit {
       securityquestion1: this.securityQuestions.value.securityquestion1,
       securityquestion2: this.securityQuestions.value.securityquestion2
     }
-    
+
     this.signupService.signup(payload).subscribe({
       next: (response) => {
         this.isSignIn = false;
@@ -83,8 +83,8 @@ export class SignupComponent implements OnInit {
           this.router.navigate(["login"])
           return;
         }
-      }, error: (e) => {
-        this._snackBar.open('Account already registered', 'OK', {
+      }, error: (err) => {
+        this._snackBar.open(err.error, 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000
@@ -93,6 +93,6 @@ export class SignupComponent implements OnInit {
       }
 
     })
-  
+
   }
 }

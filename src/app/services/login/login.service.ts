@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getAPIBaseUrl } from 'src/app/utils/common';
-
-import {login} from "../../models/login"
 import { environment } from 'src/environments/environment';
+import { Observable, Observer } from 'rxjs';
+
+import { login, LoginResponse } from "../../models/login"
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,6 @@ export class LoginService {
   }
 
   login(payload:login) {
-    return this.http.post<login>(environment.baseURL + "/login", payload);
+    return this.http.post<LoginResponse>(environment.baseURL + "/login", payload);
   }
 }

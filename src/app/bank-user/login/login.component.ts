@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn = true;
 
      const payload = {
-      userName: this.loginForm.value.email,
+      username: this.loginForm.value.email,
       password: this.loginForm.value.password
      }
 
@@ -56,11 +56,10 @@ export class LoginComponent implements OnInit {
           verticalPosition: 'top',
           duration: 5000
         });
-        
-        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('user', JSON.stringify(response.account));
         this.router.navigate(['home']);
-      }, error: (e) => {
-        this._snackBar.open('Username does not exists', 'OK', {
+      }, error: (err) => {
+        this._snackBar.open(err.error.message, 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000
