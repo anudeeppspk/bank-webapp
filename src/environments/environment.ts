@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: "http://13.234.200.225:8080"
+  baseURL: "http://localhost:8080"
 };
 
 /*
@@ -15,3 +15,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+//http://13.234.200.225:8080

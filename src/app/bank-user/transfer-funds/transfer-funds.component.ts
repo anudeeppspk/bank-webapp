@@ -143,7 +143,7 @@ export class TransferFundsComponent implements OnInit {
   }
 
   sendMoney() {
-    if (!this.transferFundsForm.valid) {
+    if (this.transferFundsForm.valid) {
       let error_message = 'Please fill in the details properly.';
       if (this.transferFundsForm.get('account_number')?.valid && this.transferFundsForm.get('amount')?.valid) {
         error_message = 'Please search the account number.';

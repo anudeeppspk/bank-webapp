@@ -27,6 +27,14 @@ export class ProfileComponent implements OnInit {
     new_password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  updateLimitLoadStates = {
+    isLoading: false,
+  }
+
+  updateLimitForm = new FormGroup({
+    set_limit: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
+  });
+
   constructor(private profileService: ProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -77,6 +85,39 @@ export class ProfileComponent implements OnInit {
       return;
     });
 
+  }
+  updateLimit()
+  {
+
+    if (!this.updateLimitForm.valid) {
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: 'Please fill in the details properly.' },
+        width: '30%',
+      });
+      return;
+    }
+
+
+    console.log("update limit function called");
+    let limit = this.updateLimitForm.getRawValue()
+    this.updateLimitLoadStates.isLoading = true;
+    let user = JSON.parse(localStorage.getItem('user')!);
+    this.profileService.updateLimit(limit.set_limit,user.accountnumber).subscribe((data) => {
+      console.log(data);
+      this.updateLimitForm.reset();
+      this.dialog.open(SuccessDialogComponent, {
+        data: { successMessage: 'Limit has been updated successfully.' },
+        width: '30%',
+      });
+       this.updateLimitLoadStates.isLoading = false;
+    }, (err) => {
+      console.log(err);
+      this.dialog.open(ErrorDialogComponent, {
+        data: { errorMessage: err.error },
+        width: '30%',
+      });
+      return;
+    });
   }
 
 }

@@ -28,5 +28,15 @@ export class ProfileService {
     return this.httpClient.post<any>(environment.baseURL + "/updatePassword", body);
   }
 
+  updateLimit(limitSet:string, accnum: string ): Observable<any> {
+    
+  return this.httpClient.post<object>(environment.baseURL + `/setLimit?limitSet=${limitSet}&accnum=${accnum}`,{});
+}
+
 
 }
+
+// updateLimit(limitSet:string, accnum: string ): Observable<any> {
+    
+//   return this.httpClient.post<object>(environment.baseURL + `/setLimit?limitSet=${limitSet}&accnum=${accnum}`,{});
+// }
