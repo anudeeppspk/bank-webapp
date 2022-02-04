@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   showHeaderFooter = false;
 
   toggleHeaderFooter(url: string) {
-    if (url.includes('login') || url.includes('signup') || url.includes('forgotPassword')) {
+    if (url.includes('login') || url.includes('signup') || url.includes('forgotPassword') || url.includes('help')) {
       this.showHeaderFooter = false;
     } else {
       this.showHeaderFooter = true;
