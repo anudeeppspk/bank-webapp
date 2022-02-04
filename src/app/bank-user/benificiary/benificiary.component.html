@@ -1,0 +1,75 @@
+<div>
+  <nav class=" navbar  bg-secondary ">
+    <div class="container-fluid">
+      <h5 class=style>Benificiary Details</h5>
+      <div class="d-felx">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let benificiary"> {{benificiary.position}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nickname">
+        <mat-header-cell *matHeaderCellDef> Nick Name </mat-header-cell>
+        <mat-cell *matCellDef="let benificiary">
+          {{benificiary.nickname}}
+          <button type="button" (click)="select(benificiary)" class="btn btn-sm btn-primary">Select</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </div>
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">BENFICIARY DETAILS</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formValue">
+            <div class="form-group">
+              <label for="exampleText1">BEN ACCOUNTNO</label>
+              <input type="text" formControlName="benAccNum" class="form-control" id="exampleText1">
+
+            </div>
+            <div class="form-grtextoup">
+              <label for="exampleText2"> Name</label>
+              <input type="text" formControlName="name" class="form-control" id="exampleText2">
+            </div>
+
+            <div class="form-grtextoup">
+              <label for="exampleText3">Nick Name</label>
+              <input type="text" formControlName="nickname" class="form-control" id="exampleText3">
+            </div>
+
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="add()" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>

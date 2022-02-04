@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn = true;
 
      const payload = {
-      userName: this.loginForm.value.email,
+      username: this.loginForm.value.email,
       password: this.loginForm.value.password
      }
 
     this.loginService.login(payload).subscribe(({
-      next: (response: any) => {
+      next: (response) => {
         this.isLoggingIn = false;
         this._snackBar.open('Login Successfully', 'OK', {
           horizontalPosition: 'end',

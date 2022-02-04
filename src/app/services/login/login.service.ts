@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable, Observer } from 'rxjs';
 
-import { login } from "../../models/login"
+import { login, LoginResponse } from "../../models/login"
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class LoginService {
   }
 
   login(payload:login) {
-    return this.http.post<login>(environment.baseURL + "/login", payload);
+    return this.http.post<LoginResponse>(environment.baseURL + "/login", payload);
   }
 }

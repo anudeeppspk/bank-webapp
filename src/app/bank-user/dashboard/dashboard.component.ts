@@ -22,11 +22,6 @@ export class DashboardComponent implements OnInit {
 
     let user = JSON.parse(localStorage.getItem('user')!);
 
-    if(user == null) {
-      this.router.navigate(['login']);
-      localStorage.clear();
-    }
-
     this.dashboardService.getAcountDetails(user.accountnumber).subscribe((account_data) => {
       this.acc_number = account_data.account.accountnumber;
       this.acc_ifsc = account_data.account.ifsccode;

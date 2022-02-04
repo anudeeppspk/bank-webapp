@@ -36,7 +36,6 @@
                             <div *ngIf="formControls['email'].errors['email']">Email must be a valid email address</div>
                         </div>
                     </div>
-                    <br>
                     <div class="form-group">
                         <label for="inputPassword4">Password</label>
                         <input [readonly]="isLoggingIn" type="password" placeholder="Enter password"
@@ -48,7 +47,6 @@
                                 characters</div>
                         </div>
                     </div>
-                    <br>
                     <div class="form-group text-center">
                         <button [disabled]="isLoggingIn" type="submit" class="btn btn-primary">
                             <span *ngIf="isLoggingIn" class="spinner-border spinner-border-sm" role="status"
@@ -67,6 +65,13 @@
                             Dont have an account. <a class="primary" routerLink="/signup">Sign up</a>
                         </small>
                     </div>
+
+                    <div class="form-group text-center mt-5">
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            <a class="primary" routerLink="/help">Help/Contact Us</a>
+                        </small>
+                    </div>
+
                 </form>
             </div>
         </div>

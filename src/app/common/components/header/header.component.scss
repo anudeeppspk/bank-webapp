@@ -10,3 +10,13 @@ a {
     text-decoration: none;
     color: white;
 }
+
+img {
+    height: 2rem;
+    width: 2rem;
+    transition: transform .25s linear;
+}
+
+img:hover {
+    transform: scale(1.25);
+}
