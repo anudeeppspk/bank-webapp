@@ -39,6 +39,8 @@ export class ForgotpasswordComponent implements OnInit {
     //   console.log(data);
     // });
 
+    console.log("Initiated");
+
     this.resetPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       securityquestion1: ['', [Validators.required]],
@@ -79,6 +81,7 @@ export class ForgotpasswordComponent implements OnInit {
     this.forgotpassService.resetPassword(payload).subscribe(({
        next:(response: any)=>{
         this.isUpdating=false;
+        console.log("Updated!")
         this._snackBar.open('Update Successful!', 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
@@ -92,6 +95,7 @@ export class ForgotpasswordComponent implements OnInit {
           verticalPosition: 'top',
         });
         this.isUpdating=false;
+        console.log("Not Found");
       }
     }))
   }
