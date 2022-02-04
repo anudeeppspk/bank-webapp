@@ -84,7 +84,9 @@ export class SignupComponent implements OnInit {
           return;
         }
       }, error: (err) => {
-        this._snackBar.open(err.error, 'OK', {
+        err.error = JSON.parse(err.error)
+        console.log("here");
+        this._snackBar.open(err.error.message, 'OK', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration: 5000
