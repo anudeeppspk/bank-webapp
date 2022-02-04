@@ -2,21 +2,16 @@
 
     <!-- Body -->
     <div class="container">
-
         <div class="row my-4 py-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-center">
-                    <span class="heading">Request Money</span>
-                </div>
-            </div>
-        </div>
+            <div class="col">
+                <div class="row d-flex justify-content-center">            
 
 
 
-        <div class="row">
-            <div class="col-12">
-                <div class="row d-flex justify-content-center">
                     <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <span class="heading">Request Money</span>
+                        </div>
                         <div class="card shadow rounded d-flex">
                             <div class="mx-4 my-4">
                                 <form [formGroup]="transferFundsForm">
@@ -106,8 +101,61 @@
                             
                         </div>
                     </div>
+                        
+                           
+                        
+
+                    
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <table>
+                                <tr>
+                                    <span class="heading">Money Request </span>
+                                    <select name="status" class="selclass" (change)="selectedStatus($event)">
+                                        <option value="PENDING">Pending</option>
+                                        <option value="COMPLETED">Paid</option>
+                                        <option value="DECLINED">Declined</option>
+                                    </select>
+                                    </tr>
+                            </table>
+                        </div>
+                        <div class="card shadow rounded d-flex">
+                            <div *ngIf="selStatus=='PENDING';else idTemplate">
+                                <div class="ag-theme-balham">
+                                    <ag-grid-angular *ngIf="rowData.length > 0" style="height:450px;"
+                                        class="ag-grid" [rowData]="rowData" [columnDefs]="columnDef"
+                                        [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true"
+                                        [frameworkComponents]="frameworkComponents">
+                                    </ag-grid-angular>
+                                </div>
+                            </div>
+                            <ng-template #idTemplate>
+                                <div *ngIf="selStatus=='COMPLETED';else idTemplate2">
+                                    <div class="ag-theme-balham">
+                                        <ag-grid-angular *ngIf="completedRow.length > 0"
+                                            style="height:450px;" class="ag-grid"
+                                            [rowData]="completedRow " [columnDefs]="completedDef"
+                                            [defaultColDef]="defaultColDef" [pagination]="true" [animateRows]="true"
+                                            [frameworkComponents]="frameworkComponents">
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>
+                                <ng-template #idTemplate2>
+                                    <div class="ag-theme-balham">
+                                        <ag-grid-angular *ngIf="declinedRow.length > 0"
+                                            style="height:450px;" class="ag-grid" [rowData]="declinedRow "
+                                            [columnDefs]="declinedDef" [defaultColDef]="defaultColDef"
+                                            [pagination]="true" [animateRows]="true"
+                                            [frameworkComponents]="frameworkComponents">
+                                        </ag-grid-angular>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+                    </div>  
+                
                 </div>
-            </div>
+            </div>    
         </div>
-    </div>
+    </div>   
 </div>

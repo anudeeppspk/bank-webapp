@@ -5,8 +5,6 @@ import { ErrorDialogComponent } from 'src/app/common/components/error-dialog/err
 import { SuccessDialogComponent } from 'src/app/common/components/success-dialog/success-dialog.component';
 import { TransferFundsService } from 'src/app/services/transfer-funds/transfer-funds.service';
 import SelectBeneficiary from 'src/app/triggers/selectBeneficiary';
-import { ApproveDeclineCellComponent } from 'src/app/common/components/approve-decline-cell/approve-decline-cell.component';
-import { RequestMoneyService } from 'src/app/services/request-money/request-money.service';
 
 
 @Component({
@@ -23,46 +21,12 @@ export class TransferFundsComponent implements OnInit {
     amount: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
   });
 
-  columnDef = [
-    { headerName: 'Sno', field: 'sno',width:50 },
-    { headerName: 'AccountNumber', field: 'AccountNumber',width:150, headerTooltip: "Name of the requester" },
-    //{ headerName: 'Name', field: 'Name',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Amount', field: 'Amount',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Approve', field: 'status',width:150, 
-    headerTooltip: "Amount transferes/received", cellRenderer:"ApproveDecline"},  
-  ];
-  completedDef=[
-    {headerName: 'Sno', field: 'sno',width:50 },
-    { headerName: 'AccountNumber', field: 'AccountNumber',width:150, headerTooltip: "Name of the requester" },
-    //{ headerName: 'Name', field: 'Name',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Amount', field: 'Amount',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Status', field: 'status',width:150}, 
-  ];
-  declinedDef=[
-    {headerName: 'Sno', field: 'sno',width:50 },
-    { headerName: 'AccountNumber', field: 'AccountNumber',width:150, headerTooltip: "Name of the requester" },
-    //{ headerName: 'Name', field: 'Name',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Amount', field: 'Amount',width:100, headerTooltip: "Amount transferes/received" },
-    { headerName: 'Status', field: 'status',width:150}, 
-  ];
-
-  defaultColDef = {
-    sortable: true,
-    filter: true
-  };
-
-  rowData: any = [];
-  completedRow:any=[];
-  declinedRow:any=[];
-  selStatus:string="PENDING";
-  frameworkComponents:any;
-
   transferAmountLoadStates = {
     isSearchLoading: false,
     isTransferLoading: false,
   }
   
-  constructor(public requestMoneyService: RequestMoneyService, 
+  constructor(
     public transferFundService: TransferFundsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -78,61 +42,6 @@ export class TransferFundsComponent implements OnInit {
         })
       });
     })
-
-    let user = JSON.parse(localStorage.getItem('user')!);
-    this.frameworkComponents={
-      ApproveDecline:ApproveDeclineCellComponent
-    }
-    this.requestMoneyService.getRequestDetails(user.accountnumber).subscribe(data => {
-      let sno = 1;
-      for (let item of data.requests) {
-        let request = {
-          sno: sno,
-          AccountNumber:item.fromAccount,
-          Amount:item.amount,
-          refno:item.requestId,
-          status:item.status
-        }
-        sno++;
-        this.rowData.push(request);
-        console.log(request.refno);
-      }
-    });
-    this.requestMoneyService.getCompletedRequest(user.accountnumber).subscribe(data => {
-      let sno = 1;
-      for (let item of data.requests) {
-        let request = {
-          sno: sno,
-          AccountNumber:item.fromAccount,
-          Amount:item.amount,
-          refno:item.requestId,
-          status:item.status
-        }
-        sno++;
-        this.completedRow.push(request);
-        console.log(request);
-      }
-    });
-    this.requestMoneyService.getDeclinedRequest(user.accountnumber).subscribe(data => {
-      let sno = 1;
-      for (let item of data.requests) {
-        let request = {
-          sno: sno,
-          AccountNumber:item.fromAccount,
-          Amount:item.amount,
-          refno:item.requestId,
-          status:item.status
-        }
-        sno++;
-        this.declinedRow.push(request);
-        console.log(request);
-      }
-    });
-  }
-
-  selectedStatus (event: any) {
-    this.selStatus = event.target.value;
-    console.log(this.selStatus);
   }
 
   clearSearchData() {
@@ -143,10 +52,11 @@ export class TransferFundsComponent implements OnInit {
   }
 
   sendMoney() {
-    if (this.transferFundsForm.valid) {
+    if (!this.transferFundsForm.valid) {
       let error_message = 'Please fill in the details properly.';
       if (this.transferFundsForm.get('account_number')?.valid && this.transferFundsForm.get('amount')?.valid) {
         error_message = 'Please search the account number.';
+        console.log("searching");  
       }
       this.dialog.open(ErrorDialogComponent, {
         data: { errorMessage: error_message },
@@ -180,6 +90,7 @@ export class TransferFundsComponent implements OnInit {
       this.dialog.open(ErrorDialogComponent, {
         data: { errorMessage: "Please enter account number." },
         width: '30%',
+        
       });
       return;
     }
