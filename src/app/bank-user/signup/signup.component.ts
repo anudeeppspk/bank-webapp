@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignupService } from 'src/app/services/signup/signup.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -14,7 +14,6 @@ export class SignupComponent implements OnInit {
   step: any=1;
   signupForm!: FormGroup;
   securityQuestions!: FormGroup;
-  userDetails!: FormGroup;
 
   isSignIn: boolean = false;
 
@@ -23,29 +22,40 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-        firstName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
-        lastName: ['', [Validators.required, Validators.pattern(/^[A-Z].*$/)]],
-        mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')]],
-      
+        firstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
+        lastName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z].*$/)]),
+        mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].*')])
+    })
+    this.securityQuestions= this.formBuilder.group({
       securityquestion1: ['', [Validators.required]],
       securityquestion2: ['', [Validators.required,Validators.pattern(/^(.*?[a-zA-Z]){2,}$/)]]
-      
     })
   }
   get formControls(): { [key: string]: AbstractControl } {
     return this.signupForm.controls;
   }
+  get formcontrols(): { [key: string]: AbstractControl }{
+    return this.securityQuestions.controls;
+  }
+
   onPrevious(){
     this.step=this.step-1;
   }
   onNext(){
-    this.step=this.step+1;
-  }
-  onSubmit() {
     this.signupForm.markAllAsTouched()
-    if (this.signupForm.invalid) {
+    if(this.signupForm.valid){
+      
+        this.step=this.step+1;
+      
+    }
+  }
+  
+  onSubmit() {
+    
+    this.securityQuestions.markAllAsTouched()
+    if (this.securityQuestions.invalid) {
       return;
     }
 
@@ -57,8 +67,8 @@ export class SignupComponent implements OnInit {
       firstname: this.signupForm.value.firstName,
       lastname: this.signupForm.value.lastName,
       phonenumber: this.signupForm.value.mobile,
-      securityquestion1: this.signupForm.value.securityquestion1,
-      securityquestion2: this.signupForm.value.securityquestion2
+      securityquestion1: this.securityQuestions.value.securityquestion1,
+      securityquestion2: this.securityQuestions.value.securityquestion2
     }
     
     this.signupService.signup(payload).subscribe({
@@ -81,6 +91,8 @@ export class SignupComponent implements OnInit {
         });
         this.isSignIn = false;
       }
+
     })
+  
   }
 }
