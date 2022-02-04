@@ -71,7 +71,7 @@ export class ForgotpasswordComponent implements OnInit {
     this.isUpdating=true;
     
     const payload = {
-      email: this.resetPasswordForm.value.email,
+      username: this.resetPasswordForm.value.email,
       securityquestion1: this.resetPasswordForm.value.securityquestion1,
       securityquestion2: this.resetPasswordForm.value.securityquestion2,
       newpassword: this.resetPasswordForm.value.newpassword,
