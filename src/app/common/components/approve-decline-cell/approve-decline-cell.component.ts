@@ -53,7 +53,7 @@ export class ApproveDeclineCellComponent implements OnInit, ICellRendererAngular
   declineTransfer(){    
     this.requestMoneyService.declineRequest(this.requestDetails).subscribe((data) => {
       this.dialog.open(SuccessDialogComponent, {
-        data: { successMessage: "Amount Send successfully." },
+        data: { successMessage: "Transaction Declined successfully." },
         width: '30%',
       });
     }, (err) => {
