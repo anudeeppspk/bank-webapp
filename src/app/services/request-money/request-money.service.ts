@@ -26,11 +26,15 @@ export class RequestMoneyService {
   }
   payRequest(payload: Request)
   {
+    location.reload();
     return this.httpClient.post(environment.baseURL + `/requests/pay` , payload,{responseType: 'text' as 'json' });
   }
   declineRequest(payload: Request)
   {
+    location.reload();
     return this.httpClient.post(environment.baseURL + `/requests/decline` , payload,{responseType: 'text' as 'json' });
   }
+
+  
 
 }
