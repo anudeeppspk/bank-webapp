@@ -88,7 +88,7 @@ export class ForgotpasswordComponent implements OnInit {
 
        });
        localStorage.setItem('user', JSON.stringify(response.account));
-        this.router.navigate(['home']);
+        this.router.navigate(['login']);
       }, error: (err: { error: { message: 'Not Found'; }; }) => {
         this._snackBar.open(err.error.message, 'OK(not found)', {
           horizontalPosition: 'end',
